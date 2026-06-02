@@ -1,11 +1,11 @@
-import { useNavigate } from 'react-router-dom';
-import { useFilteredBeans } from '../hooks/useFilteredBeans';
-import { useBeanStore } from '../store/beanStore';
-import { TabBar } from '../components/layout/TabBar';
-import { SearchBar } from '../components/ui/SearchBar';
-import { BeanCard } from '../components/bean/BeanCard';
-import { EmptyState } from '../components/ui/EmptyState';
-import { CATEGORY_OPTIONS, COUNTRIES } from '../constants';
+import { useNavigate } from "react-router-dom";
+import { useFilteredBeans } from "../hooks/useFilteredBeans";
+import { useBeanStore } from "../store/beanStore";
+import { TabBar } from "../components/layout/TabBar";
+import { SearchBar } from "../components/ui/SearchBar";
+import { BeanCard } from "../components/bean/BeanCard";
+import { EmptyState } from "../components/ui/EmptyState";
+import { CATEGORY_OPTIONS, COUNTRIES } from "../constants";
 
 export function HomePage() {
   const navigate = useNavigate();
@@ -35,29 +35,29 @@ export function HomePage() {
       <div className="sticky top-0 z-20 bg-canvas/95 backdrop-blur-sm border-b border-hairline-soft">
         <div className="px-4 pt-4 pb-2">
           <div className="flex items-center justify-between mb-3">
-            <h1 className="text-xl font-bold text-ink">豆仓</h1>
+            <h1 className="text-xl font-bold text-ink">豆仓 ☕️</h1>
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-1">
                 <button
-                  onClick={() => setSortMode('default')}
+                  onClick={() => setSortMode("default")}
                   className={`px-2.5 py-1.5 text-xs rounded-lg active:scale-[0.97] transition-all
-                    ${sortMode === 'default' ? 'bg-primary text-white font-medium' : 'text-ink-muted hover:bg-surface-card'}`}
+                    ${sortMode === "default" ? "bg-primary text-white font-medium" : "text-ink-muted hover:bg-surface-card"}`}
                 >
                   默认
                 </button>
                 <button
-                  onClick={() => setSortMode('productionDate')}
+                  onClick={() => setSortMode("productionDate")}
                   className={`px-2.5 py-1.5 text-xs rounded-lg active:scale-[0.97] transition-all
-                    ${sortMode === 'productionDate' ? 'bg-primary text-white font-medium' : 'text-ink-muted hover:bg-surface-card'}`}
+                    ${sortMode === "productionDate" ? "bg-primary text-white font-medium" : "text-ink-muted hover:bg-surface-card"}`}
                 >
-                  生产日期
+                  新生产日期
                 </button>
                 <button
-                  onClick={() => setSortMode('resting')}
+                  onClick={() => setSortMode("resting")}
                   className={`px-2.5 py-1.5 text-xs rounded-lg active:scale-[0.97] transition-all
-                    ${sortMode === 'resting' ? 'bg-primary text-white font-medium' : 'text-ink-muted hover:bg-surface-card'}`}
+                    ${sortMode === "resting" ? "bg-primary text-white font-medium" : "text-ink-muted hover:bg-surface-card"}`}
                 >
-                  可以喝了
+                  可以喝了🍵
                 </button>
               </div>
             </div>
@@ -75,7 +75,9 @@ export function HomePage() {
           >
             <option value="all">全部分类</option>
             {CATEGORY_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>{opt.label}</option>
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
             ))}
           </select>
 
@@ -97,21 +99,29 @@ export function HomePage() {
           </select>
         </div>
 
-        <TabBar activeTab={activeTab} onTabChange={setActiveTab} trashCount={trashCount} />
+        <TabBar
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          trashCount={trashCount}
+        />
       </div>
 
       {/* Bean list */}
       <div className="px-4 pt-3">
         {!hasAnyBeans ? (
-          <EmptyState onAdd={() => navigate('/add')} />
+          <EmptyState onAdd={() => navigate("/add")} />
         ) : filtered.length === 0 ? (
           <div className="text-center py-16 text-ink-muted text-sm">
-            {activeTab === 'trash' ? '回收站为空' : '没有匹配的豆子'}
+            {activeTab === "trash" ? "回收站为空" : "没有匹配的豆子"}
           </div>
         ) : (
           <div className="flex flex-col gap-2.5">
             {filtered.map((bean) => (
-              <BeanCard key={bean.id} bean={bean} isTrash={activeTab === 'trash'} />
+              <BeanCard
+                key={bean.id}
+                bean={bean}
+                isTrash={activeTab === "trash"}
+              />
             ))}
           </div>
         )}
@@ -119,15 +129,22 @@ export function HomePage() {
 
       {/* FAB */}
       <button
-        onClick={() => navigate('/add')}
+        onClick={() => navigate("/add")}
         className="fixed right-4 bottom-20 z-30 w-14 h-14 rounded-full
           bg-primary text-white shadow-lg
           hover:bg-primary-active active:scale-95
           flex items-center justify-center transition-all"
-        style={{ boxShadow: '0 4px 20px rgba(204, 120, 92, 0.35)' }}
+        style={{ boxShadow: "0 4px 20px rgba(204, 120, 92, 0.35)" }}
       >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          strokeWidth="2" strokeLinecap="round">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+        >
           <line x1="12" y1="5" x2="12" y2="19" />
           <line x1="5" y1="12" x2="19" y2="12" />
         </svg>
