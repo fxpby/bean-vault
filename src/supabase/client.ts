@@ -2,30 +2,27 @@ import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
-const siteUrl = import.meta.env.VITE_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : '');
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     autoRefreshToken: true,
     persistSession: true,
-    detectSessionInUrl: true,
+    detectSessionInUrl: false,
   },
 });
 
-export async function signInWithOtp(email: string): Promise<{ success: boolean; error?: string }> {
-  const { error } = await supabase.auth.signInWithOtp({
-    email,
-    options: {
-      shouldCreateUser: true,
-      emailRedirectTo: siteUrl,
-    },
-  });
+export async function signUp(email: string, password: string): Promise<{ success: boolean; needConfirm?: boolean; error?: string }> {
+  const { data, error } = await supabase.auth.signUp({ email, password });
   if (error) return { success: false, error: error.message };
+  // session 为 null 说明需要邮箱确认
+  if (!data.session) return { success: true, needConfirm: true };
   return { success: true };
 }
 
-export async function verifyOtp(email: string, token: string) {
-  return supabase.auth.verifyOtp({ email, token, type: 'email' });
+export async function signIn(email: string, password: string): Promise<{ success: boolean; error?: string }> {
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error) return { success: false, error: error.message };
+  return { success: true };
 }
 
 export async function signOut() {

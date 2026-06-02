@@ -4,7 +4,7 @@ import { useBeanStore } from '../store/beanStore';
 import { useToast } from '../components/ui/Toast';
 import { ConfirmDialog } from '../components/ui/ConfirmDialog';
 import type { Bean, ImportData } from '../types/bean';
-import { signInWithOtp, verifyOtp, signOut, getSession } from '../supabase/client';
+import { signIn, signUp, signOut, getSession } from '../supabase/client';
 
 export function SettingsPage() {
   const navigate = useNavigate();
@@ -15,10 +15,10 @@ export function SettingsPage() {
   const [showImportDialog, setShowImportDialog] = useState(false);
   const [importData, setImportData] = useState<Bean[]>([]);
   const [authEmail, setAuthEmail] = useState('');
-  const [authCode, setAuthCode] = useState('');
-  const [authStep, setAuthStep] = useState<'email' | 'code'>('email');
+  const [authPassword, setAuthPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showAuthPanel, setShowAuthPanel] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(true);
 
   const activeBeans = beans.filter((b) => !b.isDeleted);
   const trashBeans = beans.filter((b) => b.isDeleted);
@@ -64,32 +64,38 @@ export function SettingsPage() {
     showToast(`导入成功 (${strategy === 'merge' ? '合并' : '替换'} ${importData.length} 条记录)`);
   };
 
-  const handleSendCode = async () => {
+  const handleAuth = async () => {
     if (!authEmail.trim()) {
       showToast('请输入邮箱', 'error');
       return;
     }
-    const { success, error } = await signInWithOtp(authEmail);
-    if (success) {
-      setAuthStep('code');
-      showToast('验证码已发送');
-    } else {
-      showToast(error || '发送失败', 'error');
-    }
-  };
-
-  const handleVerifyCode = async () => {
-    if (!authCode.trim()) {
-      showToast('请输入验证码', 'error');
+    if (!authPassword.trim() || authPassword.length < 6) {
+      showToast('密码至少 6 位', 'error');
       return;
     }
-    const { error } = await verifyOtp(authEmail, authCode);
-    if (error) {
-      showToast('验证失败', 'error');
+
+    if (isSignUp) {
+      const { success, needConfirm, error } = await signUp(authEmail, authPassword);
+      if (success && needConfirm) {
+        showToast('注册成功，请检查邮箱确认后登录', 'info');
+        setShowAuthPanel(false);
+        setIsSignUp(false);
+      } else if (success) {
+        showToast('注册成功，已自动登录');
+        setIsLoggedIn(true);
+        setShowAuthPanel(false);
+      } else {
+        showToast(error || '注册失败', 'error');
+      }
     } else {
-      setIsLoggedIn(true);
-      showToast('登录成功');
-      setShowAuthPanel(false);
+      const { success, error } = await signIn(authEmail, authPassword);
+      if (success) {
+        setIsLoggedIn(true);
+        showToast('登录成功');
+        setShowAuthPanel(false);
+      } else {
+        showToast(error || '登录失败，账号不存在？请先注册', 'error');
+      }
     }
   };
 
@@ -167,47 +173,39 @@ export function SettingsPage() {
             <>
               <SettingsRow
                 icon={<CloudIcon />}
-                label="登录/注册"
-                description="通过邮箱验证码登录，同步数据到云端"
+                label={isSignUp ? '注册' : '登录'}
+                description="注册账号以同步数据到云端"
                 onClick={() => setShowAuthPanel(!showAuthPanel)}
               />
               {showAuthPanel && (
                 <div className="px-4 pb-4 space-y-3">
-                  {authStep === 'email' ? (
-                    <>
-                      <input
-                        type="email"
-                        value={authEmail}
-                        onChange={(e) => setAuthEmail(e.target.value)}
-                        placeholder="输入邮箱地址"
-                        className="form-input"
-                      />
-                      <button
-                        onClick={handleSendCode}
-                        className="w-full py-2.5 bg-primary text-white rounded-lg text-sm font-medium
-                          hover:bg-primary-active active:scale-[0.98] transition-all"
-                      >
-                        发送验证码
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <input
-                        type="text"
-                        value={authCode}
-                        onChange={(e) => setAuthCode(e.target.value)}
-                        placeholder="输入验证码"
-                        className="form-input"
-                      />
-                      <button
-                        onClick={handleVerifyCode}
-                        className="w-full py-2.5 bg-primary text-white rounded-lg text-sm font-medium
-                          hover:bg-primary-active active:scale-[0.98] transition-all"
-                      >
-                        验证
-                      </button>
-                    </>
-                  )}
+                  <input
+                    type="email"
+                    value={authEmail}
+                    onChange={(e) => setAuthEmail(e.target.value)}
+                    placeholder="邮箱地址"
+                    className="form-input"
+                  />
+                  <input
+                    type="password"
+                    value={authPassword}
+                    onChange={(e) => setAuthPassword(e.target.value)}
+                    placeholder="密码（至少 6 位）"
+                    className="form-input"
+                  />
+                  <button
+                    onClick={handleAuth}
+                    className="w-full py-2.5 bg-primary text-white rounded-lg text-sm font-medium
+                      hover:bg-primary-active active:scale-[0.98] transition-all"
+                  >
+                    {isSignUp ? '注册' : '登录'}
+                  </button>
+                  <button
+                    onClick={() => setIsSignUp(!isSignUp)}
+                    className="w-full py-2 text-xs text-ink-muted hover:text-primary transition-colors"
+                  >
+                    {isSignUp ? '已有账号？去登录' : '没有账号？去注册'}
+                  </button>
                 </div>
               )}
             </>
