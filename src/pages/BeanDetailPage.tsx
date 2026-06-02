@@ -6,8 +6,9 @@ import { ConfirmDialog } from '../components/ui/ConfirmDialog';
 import { RestingBadge } from '../components/bean/RestingBadge';
 import {
   CATEGORY_LABELS, STATUS_LABELS, PROCESS_LABELS, ROAST_LABELS,
+  COUNTRIES, CATEGORY_OPTIONS, PROCESS_OPTIONS, ROAST_OPTIONS, STATUS_OPTIONS,
 } from '../constants';
-import { formatDate } from '../utils/resting';
+import { formatDate, todayString } from '../utils/resting';
 import type { BeanFormData, BeanStatus } from '../types/bean';
 
 export function BeanDetailPage() {
@@ -23,8 +24,11 @@ export function BeanDetailPage() {
   const bean = beans.find((b) => b.id === id);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [showPermDeleteConfirm, setShowPermDeleteConfirm] = useState(false);
+  const [showFinishConfirm, setShowFinishConfirm] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editForm, setEditForm] = useState<Partial<BeanFormData>>({});
+  const [countrySearch, setCountrySearch] = useState('');
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
 
   if (!bean) {
     return (
@@ -47,9 +51,20 @@ export function BeanDetailPage() {
     showToast('已标记为正在喝');
   };
 
-  const handleFinish = () => {
+  const handleConfirmFinish = () => {
     setBeanStatus(bean.id, 'finished');
+    setShowFinishConfirm(false);
     showToast('已标记为已喝完');
+  };
+
+  const handleBackToDrinking = () => {
+    setBeanStatus(bean.id, 'drinking');
+    showToast('已恢复为正在喝');
+  };
+
+  const handleBackToShelf = () => {
+    setBeanStatus(bean.id, 'shelf');
+    showToast('已放回架子');
   };
 
   const handleDelete = () => {
@@ -112,12 +127,20 @@ export function BeanDetailPage() {
               onClick={() => {
                 setEditForm({
                   name: bean.name,
+                  category: bean.category,
+                  country: bean.country,
+                  countryCode: bean.countryCode || '',
                   estate: bean.estate,
                   variety: bean.variety,
+                  process: bean.process,
+                  roastLevel: bean.roastLevel,
                   pricePerGram: bean.pricePerGram,
                   restingDays: bean.restingDays,
+                  productionDate: bean.productionDate,
                   flavorNotes: bean.flavorNotes,
+                  status: bean.status,
                 });
+                setCountrySearch(bean.country);
                 setIsEditing(true);
               }}
               className="px-3 py-1.5 text-sm text-ink-muted rounded-lg
@@ -161,7 +184,7 @@ export function BeanDetailPage() {
 
         {/* Status actions */}
         {!bean.isDeleted && (
-          <div className="flex gap-3">
+          <div className="flex gap-3 flex-wrap">
             {bean.status === 'shelf' && (
               <button
                 onClick={handleStartDrinking}
@@ -172,22 +195,49 @@ export function BeanDetailPage() {
               </button>
             )}
             {bean.status === 'drinking' && (
-              <button
-                onClick={handleFinish}
-                className="flex-1 py-3 bg-surface-card text-ink-muted font-medium rounded-xl
-                  hover:bg-surface-cream active:scale-[0.98] transition-all"
-              >
-                喝完了
-              </button>
+              <>
+                <button
+                  onClick={() => setShowFinishConfirm(true)}
+                  className="flex-1 py-3 bg-surface-card text-ink-muted font-medium rounded-xl
+                    hover:bg-surface-cream active:scale-[0.98] transition-all"
+                >
+                  喝完了
+                </button>
+                <button
+                  onClick={handleBackToShelf}
+                  className="flex-1 py-3 bg-surface-card text-ink-muted font-medium rounded-xl
+                    hover:bg-surface-cream active:scale-[0.98] transition-all"
+                >
+                  放回架子
+                </button>
+              </>
             )}
-            {bean.status === 'fridge' && (
+            {bean.status === 'finished' && (
               <button
-                onClick={handleStartDrinking}
+                onClick={handleBackToDrinking}
                 className="flex-1 py-3 bg-primary text-white font-medium rounded-xl
                   hover:bg-primary-active active:scale-[0.98] transition-all"
               >
-                拿出来喝
+                重新开始喝
               </button>
+            )}
+            {bean.status === 'fridge' && (
+              <>
+                <button
+                  onClick={handleStartDrinking}
+                  className="flex-1 py-3 bg-primary text-white font-medium rounded-xl
+                    hover:bg-primary-active active:scale-[0.98] transition-all"
+                >
+                  拿出来喝
+                </button>
+                <button
+                  onClick={handleBackToShelf}
+                  className="flex-1 py-3 bg-surface-card text-ink-muted font-medium rounded-xl
+                    hover:bg-surface-cream active:scale-[0.98] transition-all"
+                >
+                  放回架子
+                </button>
+              </>
             )}
           </div>
         )}
@@ -196,9 +246,94 @@ export function BeanDetailPage() {
         <div className="bg-canvas rounded-xl border border-hairline p-5 space-y-4">
           <h3 className="text-sm font-semibold text-ink mb-3">详细信息</h3>
 
-          <DetailRow label="分类" value={CATEGORY_LABELS[bean.category]} />
-          <DetailRow label="状态" value={STATUS_LABELS[bean.status]} />
-          <DetailRow label="产国" value={`${flag} ${bean.country}`} />
+          <DetailRow label="分类">
+            {isEditing ? (
+              <div className="flex gap-1.5">
+                {CATEGORY_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => setEditForm({ ...editForm, category: opt.value })}
+                    className={`px-2.5 py-1 text-xs rounded-lg transition-all active:scale-[0.97]
+                      ${(editForm.category || bean.category) === opt.value
+                        ? 'bg-primary text-white font-medium'
+                        : 'bg-surface-card text-ink-muted'
+                      }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <span className="text-sm text-ink-body text-right">{CATEGORY_LABELS[bean.category]}</span>
+            )}
+          </DetailRow>
+          <DetailRow label="状态">
+            {isEditing ? (
+              <div className="flex gap-1.5">
+                {STATUS_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => setEditForm({ ...editForm, status: opt.value })}
+                    className={`px-2.5 py-1 text-xs rounded-lg transition-all active:scale-[0.97]
+                      ${(editForm.status || bean.status) === opt.value
+                        ? 'bg-primary text-white font-medium'
+                        : 'bg-surface-card text-ink-muted'
+                      }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <span className="text-sm text-ink-body text-right">{STATUS_LABELS[bean.status]}</span>
+            )}
+          </DetailRow>
+          <DetailRow label="产国">
+            {isEditing ? (
+              <div className="relative">
+                <input
+                  type="text"
+                  value={countrySearch}
+                  onChange={(e) => {
+                    setCountrySearch(e.target.value);
+                    setEditForm({ ...editForm, country: e.target.value });
+                    setShowCountryDropdown(true);
+                  }}
+                  onFocus={() => setShowCountryDropdown(true)}
+                  onBlur={() => setTimeout(() => setShowCountryDropdown(false), 200)}
+                  placeholder="搜索产国"
+                  className="text-sm text-right text-ink-body bg-surface-card rounded-lg px-2 py-1 border border-hairline w-36"
+                />
+                {showCountryDropdown && COUNTRIES.filter((c) =>
+                  c.name.includes(countrySearch) || c.code.toLowerCase().includes(countrySearch.toLowerCase())
+                ).length > 0 && (
+                  <div className="absolute right-0 top-full mt-1 bg-canvas border border-hairline
+                    rounded-lg shadow-lg max-h-36 overflow-y-auto z-10 w-40">
+                    {COUNTRIES.filter((c) =>
+                      c.name.includes(countrySearch) || c.code.toLowerCase().includes(countrySearch.toLowerCase())
+                    ).map((c) => (
+                      <button
+                        key={c.code}
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          setEditForm({ ...editForm, country: c.name, countryCode: c.code });
+                          setCountrySearch(c.name);
+                          setShowCountryDropdown(false);
+                        }}
+                        className="w-full px-3 py-1.5 text-sm text-left hover:bg-surface-card
+                          flex items-center gap-2 transition-colors"
+                      >
+                        <span>{c.flag}</span>
+                        <span>{c.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <span className="text-sm text-ink-body text-right">{flag} {bean.country}</span>
+            )}
+          </DetailRow>
 
           {isEditing ? (
             <DetailRow label="庄园">
@@ -226,8 +361,48 @@ export function BeanDetailPage() {
             bean.variety ? <DetailRow label="豆种" value={bean.variety} /> : null
           )}
 
-          <DetailRow label="处理法" value={PROCESS_LABELS[bean.process]} />
-          <DetailRow label="烘焙度" value={ROAST_LABELS[bean.roastLevel]} />
+          <DetailRow label="处理法">
+            {isEditing ? (
+              <div className="flex gap-1.5">
+                {PROCESS_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => setEditForm({ ...editForm, process: opt.value })}
+                    className={`px-2.5 py-1 text-xs rounded-lg transition-all active:scale-[0.97]
+                      ${(editForm.process || bean.process) === opt.value
+                        ? 'bg-primary text-white font-medium'
+                        : 'bg-surface-card text-ink-muted'
+                      }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <span className="text-sm text-ink-body text-right">{PROCESS_LABELS[bean.process]}</span>
+            )}
+          </DetailRow>
+          <DetailRow label="烘焙度">
+            {isEditing ? (
+              <div className="flex gap-1.5">
+                {ROAST_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => setEditForm({ ...editForm, roastLevel: opt.value })}
+                    className={`px-2.5 py-1 text-xs rounded-lg transition-all active:scale-[0.97]
+                      ${(editForm.roastLevel || bean.roastLevel) === opt.value
+                        ? 'bg-primary text-white font-medium'
+                        : 'bg-surface-card text-ink-muted'
+                      }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <span className="text-sm text-ink-body text-right">{ROAST_LABELS[bean.roastLevel]}</span>
+            )}
+          </DetailRow>
 
           <div>
             <span className="text-sm text-ink-soft block mb-1.5">风味描述</span>
@@ -299,7 +474,19 @@ export function BeanDetailPage() {
             <DetailRow label="养豆天数" value={`${bean.restingDays} 天`} />
           )}
 
-          <DetailRow label="生产日期" value={formatDate(bean.productionDate)} />
+          <DetailRow label="生产日期">
+            {isEditing ? (
+              <input
+                type="date"
+                value={editForm.productionDate ?? bean.productionDate}
+                onChange={(e) => setEditForm({ ...editForm, productionDate: e.target.value })}
+                max={todayString()}
+                className="text-sm text-right text-ink-body bg-surface-card rounded-lg px-2 py-1 border border-hairline"
+              />
+            ) : (
+              <span className="text-sm text-ink-body text-right">{formatDate(bean.productionDate)}</span>
+            )}
+          </DetailRow>
           <DetailRow label="添加日期" value={formatDate(bean.createdAt.split('T')[0])} />
         </div>
 
@@ -345,6 +532,16 @@ export function BeanDetailPage() {
         confirmLabel="删除"
         onConfirm={handleDelete}
         variant="danger"
+      />
+
+      <ConfirmDialog
+        open={showFinishConfirm}
+        onOpenChange={setShowFinishConfirm}
+        title="确认喝完了"
+        description={`确定「${bean.name}」已经喝完了吗？确认后可在设置中重新开始喝。`}
+        confirmLabel="喝完了"
+        onConfirm={handleConfirmFinish}
+        variant="default"
       />
 
       <ConfirmDialog
