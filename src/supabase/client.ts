@@ -2,6 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+const siteUrl = import.meta.env.VITE_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : '');
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
@@ -16,6 +17,7 @@ export async function signInWithOtp(email: string): Promise<{ success: boolean; 
     email,
     options: {
       shouldCreateUser: true,
+      emailRedirectTo: siteUrl,
     },
   });
   if (error) return { success: false, error: error.message };
