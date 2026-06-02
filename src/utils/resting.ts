@@ -45,6 +45,10 @@ export function compareByProductionDate(a: Bean, b: Bean): number {
   return new Date(b.productionDate).getTime() - new Date(a.productionDate).getTime();
 }
 
+export function compareByCreatedAt(a: Bean, b: Bean): number {
+  return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+}
+
 export function formatDate(dateStr: string): string {
   const d = new Date(dateStr + 'T00:00:00');
   return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;

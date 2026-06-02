@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useBeanStore } from '../store/beanStore';
-import { filterBeans, compareByResting, compareByProductionDate } from '../utils/resting';
+import { filterBeans, compareByResting, compareByProductionDate, compareByCreatedAt, isRested } from '../utils/resting';
 
 export function useFilteredBeans() {
   const beans = useBeanStore((s) => s.beans);
@@ -12,8 +12,17 @@ export function useFilteredBeans() {
   const [countryFilter, setCountryFilter] = useState('all');
 
   const filtered = useMemo(() => {
-    const result = filterBeans(beans, activeTab, searchQuery, categoryFilter, countryFilter);
-    const sorter = sortMode === 'resting' ? compareByResting : compareByProductionDate;
+    let result = filterBeans(beans, activeTab, searchQuery, categoryFilter, countryFilter);
+
+    // "可以喝了" sort mode: only show rested beans
+    if (sortMode === 'resting') {
+      result = result.filter((b) => isRested(b.productionDate, b.restingDays));
+    }
+
+    const sorter =
+      sortMode === 'resting' ? compareByResting :
+      sortMode === 'productionDate' ? compareByProductionDate :
+      compareByCreatedAt;
     return [...result].sort(sorter);
   }, [beans, activeTab, searchQuery, categoryFilter, countryFilter, sortMode]);
 

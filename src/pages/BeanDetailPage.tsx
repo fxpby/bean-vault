@@ -183,7 +183,7 @@ export function BeanDetailPage() {
         </div>
 
         {/* Status actions */}
-        {!bean.isDeleted && (
+        {!isEditing && !bean.isDeleted && (
           <div className="flex gap-3 flex-wrap">
             {bean.status === 'shelf' && (
               <button

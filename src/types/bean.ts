@@ -26,7 +26,7 @@ export type ProcessMethod = 'washed' | 'natural' | 'honey' | 'anaerobic' | 'othe
 
 export type RoastLevel = 'ultra-light' | 'light' | 'medium' | 'dark';
 
-export type SortMode = 'productionDate' | 'resting';
+export type SortMode = 'default' | 'productionDate' | 'resting';
 
 export interface BeanFormData {
   name: string;

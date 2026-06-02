@@ -59,7 +59,7 @@ export const useBeanStore = create<BeanStore>()(
   persist(
     (set, get) => ({
       beans: [],
-      sortMode: 'productionDate',
+      sortMode: 'default',
       syncQueue: [],
       isOnline: true,
       isSyncing: false,

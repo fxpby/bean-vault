@@ -37,19 +37,29 @@ export function HomePage() {
           <div className="flex items-center justify-between mb-3">
             <h1 className="text-xl font-bold text-ink">豆仓</h1>
             <div className="flex items-center gap-2">
-              <button
-                onClick={() => setSortMode(sortMode === 'resting' ? 'productionDate' : 'resting')}
-                className="flex items-center gap-1 px-2.5 py-1.5 text-xs text-ink-muted
-                  rounded-lg hover:bg-surface-card active:scale-[0.97] transition-all"
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  strokeWidth="2" strokeLinecap="round">
-                  <line x1="4" y1="6" x2="16" y2="6" />
-                  <line x1="4" y1="12" x2="12" y2="12" />
-                  <line x1="4" y1="18" x2="8" y2="18" />
-                </svg>
-                {sortMode === 'resting' ? '可以喝了' : '生产日期'}
-              </button>
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => setSortMode('default')}
+                  className={`px-2.5 py-1.5 text-xs rounded-lg active:scale-[0.97] transition-all
+                    ${sortMode === 'default' ? 'bg-primary text-white font-medium' : 'text-ink-muted hover:bg-surface-card'}`}
+                >
+                  默认
+                </button>
+                <button
+                  onClick={() => setSortMode('productionDate')}
+                  className={`px-2.5 py-1.5 text-xs rounded-lg active:scale-[0.97] transition-all
+                    ${sortMode === 'productionDate' ? 'bg-primary text-white font-medium' : 'text-ink-muted hover:bg-surface-card'}`}
+                >
+                  生产日期
+                </button>
+                <button
+                  onClick={() => setSortMode('resting')}
+                  className={`px-2.5 py-1.5 text-xs rounded-lg active:scale-[0.97] transition-all
+                    ${sortMode === 'resting' ? 'bg-primary text-white font-medium' : 'text-ink-muted hover:bg-surface-card'}`}
+                >
+                  可以喝了
+                </button>
+              </div>
             </div>
           </div>
           <SearchBar value={searchQuery} onChange={setSearchQuery} />
