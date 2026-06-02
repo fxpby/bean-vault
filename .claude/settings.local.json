@@ -12,7 +12,9 @@
       "Bash(npx vite:*)",
       "Bash(wc -l src/**/*.ts src/**/*.tsx src/**/*.css)",
       "Bash(ls -la .env*)",
-      "mcp__chrome-devtools__navigate_page"
+      "mcp__chrome-devtools__navigate_page",
+      "Bash(TRELLIS_CONTEXT_ID=00-bootstrap-guidelines python3:*)",
+      "Bash(TRELLIS_CONTEXT_ID=fxpby-session python3:*)"
     ]
   }
 }

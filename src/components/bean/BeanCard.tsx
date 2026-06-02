@@ -1,10 +1,12 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { Bean } from '../../types/bean';
-import { CATEGORY_LABELS } from '../../constants';
+import { CATEGORY_LABELS, PROCESS_LABELS, ROAST_LABELS } from '../../constants';
 import { formatDate } from '../../utils/resting';
 import { RestingBadge } from './RestingBadge';
 import { useBeanStore } from '../../store/beanStore';
 import { useToast } from '../ui/Toast';
+import { ConfirmDialog } from '../ui/ConfirmDialog';
 
 interface BeanCardProps {
   bean: Bean;
@@ -16,7 +18,10 @@ export function BeanCard({ bean, isTrash }: BeanCardProps) {
   const setBeanStatus = useBeanStore((s) => s.setBeanStatus);
   const deleteBean = useBeanStore((s) => s.deleteBean);
   const restoreBean = useBeanStore((s) => s.restoreBean);
+  const permanentlyDeleteBean = useBeanStore((s) => s.permanentlyDeleteBean);
   const { showToast } = useToast();
+
+  const [showPermDeleteConfirm, setShowPermDeleteConfirm] = useState(false);
 
   const handleStartDrinking = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -36,6 +41,32 @@ export function BeanCard({ bean, isTrash }: BeanCardProps) {
     showToast('已恢复');
   };
 
+  const handlePermDelete = () => {
+    permanentlyDeleteBean(bean.id);
+    showToast('已彻底删除');
+  };
+
+  const handleShare = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const flag = bean.countryCode
+      ? String.fromCodePoint(...[...bean.countryCode.toUpperCase()].map(c => 0x1F1E6 + c.charCodeAt(0) - 65))
+      : '';
+    const text = [
+      `☕ ${bean.name} ${flag}`,
+      `产区：${bean.country}${bean.estate ? ` · ${bean.estate}` : ''}`,
+      `豆种：${bean.variety || '-'}`,
+      `处理法：${PROCESS_LABELS[bean.process]}  烘焙度：${ROAST_LABELS[bean.roastLevel]}`,
+      `风味：${bean.flavorNotes.length > 0 ? bean.flavorNotes.join('、') : '-'}`,
+      `养豆：${bean.restingDays} 天  生产日期：${formatDate(bean.productionDate)}`,
+      bean.pricePerGram > 0 ? `克单价：¥${bean.pricePerGram.toFixed(2)}/克` : '',
+    ].filter(Boolean).join('\n');
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('已复制到剪贴板');
+    }).catch(() => {
+      showToast('复制失败', 'error');
+    });
+  };
+
   const statusBadge = (() => {
     if (bean.status === 'drinking') return (
       <span className="text-xs px-2 py-0.5 rounded-full bg-primary-soft text-primary font-medium">正在喝</span>
@@ -50,8 +81,9 @@ export function BeanCard({ bean, isTrash }: BeanCardProps) {
   })();
 
   return (
-    <div
-      onClick={() => !isTrash && navigate(`/bean/${bean.id}`)}
+    <>
+      <div
+        onClick={() => !isTrash && navigate(`/bean/${bean.id}`)}
       className="bg-canvas rounded-xl p-4 border border-hairline
         hover:border-hairline-soft hover:shadow-sm active:scale-[0.99]
         transition-all cursor-pointer"
@@ -138,32 +170,73 @@ export function BeanCard({ bean, isTrash }: BeanCardProps) {
         )}
 
         {isTrash && (
-          <button
-            onClick={handleRestore}
-            className="px-2.5 py-1.5 text-xs font-medium text-primary
-              hover:bg-primary-soft rounded-lg active:scale-[0.97] transition-all"
-          >
-            恢复
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleRestore}
+              className="px-2.5 py-1.5 text-xs font-medium text-primary
+                hover:bg-primary-soft rounded-lg active:scale-[0.97] transition-all"
+            >
+              恢复
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowPermDeleteConfirm(true);
+              }}
+              className="px-2.5 py-1.5 text-xs font-medium text-error
+                hover:bg-error-soft rounded-lg active:scale-[0.97] transition-all"
+            >
+              彻底删除
+            </button>
+          </div>
         )}
       </div>
 
       {/* Price & date info */}
       {!isTrash && (
-        <div className="flex items-center gap-3 mt-2.5 pt-2.5 border-t border-hairline-soft">
-          {bean.pricePerGram > 0 && (
-            <span className="text-xs text-ink-muted">
-              ¥{bean.pricePerGram.toFixed(2)}/g
+        <div className="flex items-center justify-between gap-3 mt-2.5 pt-2.5 border-t border-hairline-soft">
+          <div className="flex items-center gap-3">
+            {bean.pricePerGram > 0 && (
+              <span className="text-xs text-ink-muted">
+                ¥{bean.pricePerGram.toFixed(2)}/g
+              </span>
+            )}
+            <span className="text-xs text-ink-soft">
+              生产 {formatDate(bean.productionDate)}
             </span>
-          )}
-          <span className="text-xs text-ink-soft">
-            生产 {formatDate(bean.productionDate)}
-          </span>
-          <span className="text-xs text-ink-soft">
-            养豆 {bean.restingDays} 天
-          </span>
+            <span className="text-xs text-ink-soft">
+              养豆 {bean.restingDays} 天
+            </span>
+          </div>
+          <button
+            onClick={handleShare}
+            className="flex items-center gap-1 px-2 py-1 text-xs text-ink-soft
+              hover:text-primary hover:bg-primary-soft rounded-lg
+              active:scale-[0.97] transition-all flex-shrink-0"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              strokeWidth="2" strokeLinecap="round">
+              <circle cx="18" cy="5" r="3" />
+              <circle cx="6" cy="12" r="3" />
+              <circle cx="18" cy="19" r="3" />
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+            </svg>
+            分享
+          </button>
         </div>
       )}
     </div>
+
+    <ConfirmDialog
+      open={showPermDeleteConfirm}
+      onOpenChange={setShowPermDeleteConfirm}
+      title="彻底删除"
+      description={`确定要彻底删除「${bean.name}」吗？此操作不可撤销。`}
+      confirmLabel="彻底删除"
+      onConfirm={handlePermDelete}
+      variant="danger"
+    />
+  </>
   );
 }
