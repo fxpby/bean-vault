@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx getdesign@latest:*)",
+      "mcp__chrome-devtools__take_screenshot",
+      "Bash(trellis init:*)",
+      "Bash(python3:*)",
+      "Bash(ls -la *.json *.ts *.tsx *.html *.js)",
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx vite:*)",
+      "Bash(wc -l src/**/*.ts src/**/*.tsx src/**/*.css)",
+      "Bash(ls -la .env*)",
+      "mcp__chrome-devtools__navigate_page"
+    ]
+  }
+}

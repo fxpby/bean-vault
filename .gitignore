@@ -1,0 +1,46 @@
+# Dependencies
+/node_modules
+
+# Production
+/build
+/dist
+
+# Env files (keep .env.example but not real .env)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Cache
+.cache-loader
+*.tsbuildinfo
+node_modules/.vite
+
+# Supabase (local dev config - keep migrations)
+supabase/.branches/
+supabase/.temp/
+
+# Trellis (developer workspace journals are personal)
+.trellis/workspace/
+.trellis/.developer
+
+# Testing
+coverage/
+.nyc_output/
