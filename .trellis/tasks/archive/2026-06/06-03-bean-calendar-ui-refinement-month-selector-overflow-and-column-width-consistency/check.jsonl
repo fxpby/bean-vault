@@ -1,0 +1,3 @@
+{"file": ".trellis/spec/frontend/component-guidelines.md", "reason": "Check component implementation follows React best practices"}
+{"file": ".trellis/spec/frontend/quality-guidelines.md", "reason": "Verify code quality and responsive behavior"}
+{"file": "prd.md", "reason": "Verify implementation meets all acceptance criteria"}
