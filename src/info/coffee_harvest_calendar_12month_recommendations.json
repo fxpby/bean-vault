@@ -1,0 +1,1875 @@
+{
+  "title": "全球咖啡采收日历",
+  "subtitle": "Harvest → Arrival in China / 斜条纹 = 副季",
+  "source_image": "IMG_2463.JPG",
+  "extraction_note": "根据图片视觉解析；横条按覆盖月份转为整月区间，到港时间为精品豆到中国市场的大致窗口，实际因处理方式和物流有 1–2 个月浮动。",
+  "legend": {
+    "harvest_primary": {
+      "label_zh": "采收（主季）",
+      "visual": "orange_solid"
+    },
+    "harvest_secondary": {
+      "label_zh": "采收（副季）",
+      "visual": "orange_diagonal_stripe"
+    },
+    "arrival_primary": {
+      "label_zh": "到港（主季）",
+      "visual": "teal_solid"
+    },
+    "arrival_secondary": {
+      "label_zh": "到港（副季）",
+      "visual": "teal_diagonal_stripe"
+    }
+  },
+  "months": [
+    {
+      "num": 1,
+      "zh": "1月"
+    },
+    {
+      "num": 2,
+      "zh": "2月"
+    },
+    {
+      "num": 3,
+      "zh": "3月"
+    },
+    {
+      "num": 4,
+      "zh": "4月"
+    },
+    {
+      "num": 5,
+      "zh": "5月"
+    },
+    {
+      "num": 6,
+      "zh": "6月"
+    },
+    {
+      "num": 7,
+      "zh": "7月"
+    },
+    {
+      "num": 8,
+      "zh": "8月"
+    },
+    {
+      "num": 9,
+      "zh": "9月"
+    },
+    {
+      "num": 10,
+      "zh": "10月"
+    },
+    {
+      "num": 11,
+      "zh": "11月"
+    },
+    {
+      "num": 12,
+      "zh": "12月"
+    }
+  ],
+  "countries": [
+    {
+      "id": "ethiopia",
+      "name_zh": "埃塞俄比亚",
+      "flag": "🇪🇹",
+      "harvest": {
+        "primary": [
+          1,
+          10,
+          11,
+          12
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          3,
+          4,
+          5
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "kenya",
+      "name_zh": "肯尼亚",
+      "flag": "🇰🇪",
+      "harvest": {
+        "primary": [
+          10,
+          11,
+          12
+        ],
+        "secondary": [
+          6,
+          7
+        ]
+      },
+      "arrival": {
+        "primary": [
+          2,
+          3,
+          4
+        ],
+        "secondary": [
+          8,
+          9
+        ]
+      }
+    },
+    {
+      "id": "rwanda",
+      "name_zh": "卢旺达",
+      "flag": "🇷🇼",
+      "harvest": {
+        "primary": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          8,
+          9,
+          10
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "colombia",
+      "name_zh": "哥伦比亚",
+      "flag": "🇨🇴",
+      "harvest": {
+        "primary": [
+          9,
+          10,
+          11,
+          12
+        ],
+        "secondary": [
+          4,
+          5,
+          6
+        ]
+      },
+      "arrival": {
+        "primary": [
+          1,
+          2,
+          3
+        ],
+        "secondary": [
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "id": "peru",
+      "name_zh": "秘鲁",
+      "flag": "🇵🇪",
+      "harvest": {
+        "primary": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          9,
+          10,
+          11
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "panama",
+      "name_zh": "巴拿马",
+      "flag": "🇵🇦",
+      "harvest": {
+        "primary": [
+          1,
+          2,
+          3
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          5,
+          6,
+          7
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "costa_rica",
+      "name_zh": "哥斯达黎加",
+      "flag": "🇨🇷",
+      "harvest": {
+        "primary": [
+          1,
+          2,
+          3,
+          12
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          4,
+          5,
+          6
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "honduras",
+      "name_zh": "洪都拉斯",
+      "flag": "🇭🇳",
+      "harvest": {
+        "primary": [
+          1,
+          2,
+          3,
+          11,
+          12
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "guatemala",
+      "name_zh": "危地马拉",
+      "flag": "🇬🇹",
+      "harvest": {
+        "primary": [
+          1,
+          2,
+          3,
+          12
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "brazil",
+      "name_zh": "巴西",
+      "flag": "🇧🇷",
+      "harvest": {
+        "primary": [
+          5,
+          6,
+          7,
+          8
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          10,
+          11,
+          12
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "yunnan",
+      "name_zh": "云南",
+      "flag": "🇨🇳",
+      "harvest": {
+        "primary": [
+          1,
+          2,
+          11,
+          12
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          3,
+          4,
+          5
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "indonesia",
+      "name_zh": "印度尼西亚",
+      "flag": "🇮🇩",
+      "harvest": {
+        "primary": [
+          1,
+          2,
+          3,
+          11,
+          12
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          5,
+          6,
+          7,
+          8
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "ecuador",
+      "name_zh": "厄瓜多尔",
+      "flag": "🇪🇨",
+      "harvest": {
+        "primary": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          10,
+          11,
+          12
+        ],
+        "secondary": []
+      }
+    }
+  ],
+  "origin_attributes": {
+    "ethiopia": {
+      "flavor_tags": [
+        "花香",
+        "柑橘",
+        "莓果",
+        "茶感",
+        "明亮酸质"
+      ],
+      "process_notes": [
+        "水洗清透",
+        "日晒果香浓郁"
+      ],
+      "brewing": [
+        "手冲",
+        "冰手冲",
+        "浅烘浓缩"
+      ],
+      "app_positioning": "花果香代表产区，适合作为精品咖啡入门与进阶风味标尺"
+    },
+    "kenya": {
+      "flavor_tags": [
+        "黑加仑",
+        "番茄/乌梅酸",
+        "葡萄柚",
+        "高酸",
+        "高甜感"
+      ],
+      "process_notes": [
+        "水洗常见",
+        "酸甜结构强"
+      ],
+      "brewing": [
+        "手冲",
+        "冰手冲",
+        "美式"
+      ],
+      "app_positioning": "酸质明亮、层次强，适合喜欢清爽冲击感的人"
+    },
+    "rwanda": {
+      "flavor_tags": [
+        "红茶",
+        "红糖",
+        "红色浆果",
+        "柑橘",
+        "干净"
+      ],
+      "process_notes": [
+        "水洗常见",
+        "甜感稳定"
+      ],
+      "brewing": [
+        "手冲",
+        "法压",
+        "美式"
+      ],
+      "app_positioning": "东非系但更柔和，兼具茶感与甜感"
+    },
+    "colombia": {
+      "flavor_tags": [
+        "焦糖",
+        "坚果",
+        "红果",
+        "柑橘",
+        "均衡"
+      ],
+      "process_notes": [
+        "水洗常见",
+        "厌氧/特殊处理选择多"
+      ],
+      "brewing": [
+        "手冲",
+        "意式",
+        "奶咖"
+      ],
+      "app_positioning": "全年存在感强，均衡、稳定、可玩性高"
+    },
+    "peru": {
+      "flavor_tags": [
+        "坚果",
+        "巧克力",
+        "蜂蜜",
+        "温和果酸",
+        "干净"
+      ],
+      "process_notes": [
+        "水洗常见",
+        "有机/小农批次多"
+      ],
+      "brewing": [
+        "手冲",
+        "法压",
+        "奶咖"
+      ],
+      "app_positioning": "柔和、干净、性价比友好，适合日常口粮"
+    },
+    "panama": {
+      "flavor_tags": [
+        "茉莉花",
+        "柑橘",
+        "热带水果",
+        "蜂蜜",
+        "精致茶感"
+      ],
+      "process_notes": [
+        "瑰夏代表性强",
+        "水洗/日晒/厌氧风格差异大"
+      ],
+      "brewing": [
+        "手冲",
+        "分享壶",
+        "冰手冲"
+      ],
+      "app_positioning": "高端精品与瑰夏代表，适合做风味亮点推荐"
+    },
+    "costa_rica": {
+      "flavor_tags": [
+        "蜂蜜",
+        "橙子",
+        "焦糖",
+        "坚果",
+        "甜感"
+      ],
+      "process_notes": [
+        "蜜处理代表性强",
+        "处理法风格丰富"
+      ],
+      "brewing": [
+        "手冲",
+        "聪明杯",
+        "奶咖"
+      ],
+      "app_positioning": "蜜处理友好，甜感突出，适合中浅到中烘"
+    },
+    "honduras": {
+      "flavor_tags": [
+        "焦糖",
+        "坚果",
+        "可可",
+        "橙皮",
+        "圆润"
+      ],
+      "process_notes": [
+        "水洗常见",
+        "日常口粮友好"
+      ],
+      "brewing": [
+        "手冲",
+        "意式",
+        "奶咖"
+      ],
+      "app_positioning": "中美洲性价比产区，适合均衡型日常饮用"
+    },
+    "guatemala": {
+      "flavor_tags": [
+        "巧克力",
+        "坚果",
+        "烟熏/香料",
+        "柑橘",
+        "厚实"
+      ],
+      "process_notes": [
+        "水洗常见",
+        "高海拔批次结构好"
+      ],
+      "brewing": [
+        "手冲",
+        "意式",
+        "奶咖"
+      ],
+      "app_positioning": "醇厚、稳定、甜苦平衡，适合喜欢厚实口感"
+    },
+    "brazil": {
+      "flavor_tags": [
+        "坚果",
+        "巧克力",
+        "奶油",
+        "低酸",
+        "焦糖"
+      ],
+      "process_notes": [
+        "日晒/半日晒常见",
+        "意式拼配基础产区"
+      ],
+      "brewing": [
+        "意式",
+        "奶咖",
+        "冷萃"
+      ],
+      "app_positioning": "低酸、坚果巧克力调性，适合意式和日常奶咖"
+    },
+    "yunnan": {
+      "flavor_tags": [
+        "红糖",
+        "坚果",
+        "热带水果",
+        "发酵果香",
+        "可可"
+      ],
+      "process_notes": [
+        "水洗稳定",
+        "日晒/厌氧进步快"
+      ],
+      "brewing": [
+        "手冲",
+        "意式",
+        "奶咖"
+      ],
+      "app_positioning": "本土新鲜、价格友好，适合做本地化推荐"
+    },
+    "indonesia": {
+      "flavor_tags": [
+        "草本",
+        "香料",
+        "黑巧",
+        "低酸",
+        "厚重"
+      ],
+      "process_notes": [
+        "湿刨法特色",
+        "也有水洗/日晒精品批次"
+      ],
+      "brewing": [
+        "手冲",
+        "法压",
+        "奶咖"
+      ],
+      "app_positioning": "低酸厚重、草本香料感明显，适合偏醇厚口味"
+    },
+    "ecuador": {
+      "flavor_tags": [
+        "热带水果",
+        "花香",
+        "可可",
+        "蜂蜜",
+        "干净甜感"
+      ],
+      "process_notes": [
+        "小批次精品潜力高",
+        "处理法多样"
+      ],
+      "brewing": [
+        "手冲",
+        "冰手冲",
+        "分享壶"
+      ],
+      "app_positioning": "小众精品感强，适合做探索型推荐"
+    }
+  },
+  "monthly_recommendations": [
+    {
+      "month": 1,
+      "cards": [
+        {
+          "rank": 1,
+          "country_id": "colombia",
+          "country": "哥伦比亚",
+          "flag": "🇨🇴",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季新鲜到港",
+          "flavor": "均衡甜感，适合从口粮到风味款的开年补货",
+          "flavor_tags": [
+            "焦糖",
+            "坚果",
+            "红果",
+            "柑橘",
+            "均衡"
+          ],
+          "process_notes": [
+            "水洗常见",
+            "厌氧/特殊处理选择多"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "意式",
+            "奶咖"
+          ],
+          "app_positioning": "全年存在感强，均衡、稳定、可玩性高"
+        },
+        {
+          "rank": 2,
+          "country_id": "yunnan",
+          "country": "云南",
+          "flag": "🇨🇳",
+          "basis_from_chart": "harvest_primary",
+          "reason": "本土采收季",
+          "flavor": "新季批次近场流通快，适合关注日晒与厌氧批次",
+          "flavor_tags": [
+            "红糖",
+            "坚果",
+            "热带水果",
+            "发酵果香",
+            "可可"
+          ],
+          "process_notes": [
+            "水洗稳定",
+            "日晒/厌氧进步快"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "意式",
+            "奶咖"
+          ],
+          "app_positioning": "本土新鲜、价格友好，适合做本地化推荐"
+        },
+        {
+          "rank": 3,
+          "country_id": "ethiopia",
+          "country": "埃塞俄比亚",
+          "flag": "🇪🇹",
+          "basis_from_chart": "harvest_primary",
+          "reason": "主季采收尾声",
+          "flavor": "花果香潜力高，适合关注新季预售与后续到港",
+          "flavor_tags": [
+            "花香",
+            "柑橘",
+            "莓果",
+            "茶感",
+            "明亮酸质"
+          ],
+          "process_notes": [
+            "水洗清透",
+            "日晒果香浓郁"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "冰手冲",
+            "浅烘浓缩"
+          ],
+          "app_positioning": "花果香代表产区，适合作为精品咖啡入门与进阶风味标尺"
+        }
+      ],
+      "title": "1月 · 本月喝什么？"
+    },
+    {
+      "month": 2,
+      "cards": [
+        {
+          "rank": 1,
+          "country_id": "kenya",
+          "country": "肯尼亚",
+          "flag": "🇰🇪",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季到港开始",
+          "flavor": "酸质明亮、莓果感强，适合清爽型手冲",
+          "flavor_tags": [
+            "黑加仑",
+            "番茄/乌梅酸",
+            "葡萄柚",
+            "高酸",
+            "高甜感"
+          ],
+          "process_notes": [
+            "水洗常见",
+            "酸甜结构强"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "冰手冲",
+            "美式"
+          ],
+          "app_positioning": "酸质明亮、层次强，适合喜欢清爽冲击感的人"
+        },
+        {
+          "rank": 2,
+          "country_id": "colombia",
+          "country": "哥伦比亚",
+          "flag": "🇨🇴",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季持续到港",
+          "flavor": "焦糖坚果与红果并存，稳定好喝",
+          "flavor_tags": [
+            "焦糖",
+            "坚果",
+            "红果",
+            "柑橘",
+            "均衡"
+          ],
+          "process_notes": [
+            "水洗常见",
+            "厌氧/特殊处理选择多"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "意式",
+            "奶咖"
+          ],
+          "app_positioning": "全年存在感强，均衡、稳定、可玩性高"
+        },
+        {
+          "rank": 3,
+          "country_id": "yunnan",
+          "country": "云南",
+          "flag": "🇨🇳",
+          "basis_from_chart": "harvest_primary",
+          "reason": "本土采收季",
+          "flavor": "新鲜度和性价比优势明显，适合日常豆仓补充",
+          "flavor_tags": [
+            "红糖",
+            "坚果",
+            "热带水果",
+            "发酵果香",
+            "可可"
+          ],
+          "process_notes": [
+            "水洗稳定",
+            "日晒/厌氧进步快"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "意式",
+            "奶咖"
+          ],
+          "app_positioning": "本土新鲜、价格友好，适合做本地化推荐"
+        }
+      ],
+      "title": "2月 · 本月喝什么？"
+    },
+    {
+      "month": 3,
+      "cards": [
+        {
+          "rank": 1,
+          "country_id": "ethiopia",
+          "country": "埃塞俄比亚",
+          "flag": "🇪🇹",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季新鲜到港",
+          "flavor": "花香、柑橘、莓果进入较好赏味窗口",
+          "flavor_tags": [
+            "花香",
+            "柑橘",
+            "莓果",
+            "茶感",
+            "明亮酸质"
+          ],
+          "process_notes": [
+            "水洗清透",
+            "日晒果香浓郁"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "冰手冲",
+            "浅烘浓缩"
+          ],
+          "app_positioning": "花果香代表产区，适合作为精品咖啡入门与进阶风味标尺"
+        },
+        {
+          "rank": 2,
+          "country_id": "kenya",
+          "country": "肯尼亚",
+          "flag": "🇰🇪",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季新鲜到港",
+          "flavor": "黑加仑与高酸结构突出，适合冰手冲",
+          "flavor_tags": [
+            "黑加仑",
+            "番茄/乌梅酸",
+            "葡萄柚",
+            "高酸",
+            "高甜感"
+          ],
+          "process_notes": [
+            "水洗常见",
+            "酸甜结构强"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "冰手冲",
+            "美式"
+          ],
+          "app_positioning": "酸质明亮、层次强，适合喜欢清爽冲击感的人"
+        },
+        {
+          "rank": 3,
+          "country_id": "yunnan",
+          "country": "云南",
+          "flag": "🇨🇳",
+          "basis_from_chart": "arrival_primary",
+          "reason": "本土新季到港",
+          "flavor": "运输链路短，适合选日晒或特殊处理批次",
+          "flavor_tags": [
+            "红糖",
+            "坚果",
+            "热带水果",
+            "发酵果香",
+            "可可"
+          ],
+          "process_notes": [
+            "水洗稳定",
+            "日晒/厌氧进步快"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "意式",
+            "奶咖"
+          ],
+          "app_positioning": "本土新鲜、价格友好，适合做本地化推荐"
+        }
+      ],
+      "title": "3月 · 本月喝什么？"
+    },
+    {
+      "month": 4,
+      "cards": [
+        {
+          "rank": 1,
+          "country_id": "ethiopia",
+          "country": "埃塞俄比亚",
+          "flag": "🇪🇹",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季到港延续",
+          "flavor": "花果香和茶感表现稳定，适合浅烘手冲",
+          "flavor_tags": [
+            "花香",
+            "柑橘",
+            "莓果",
+            "茶感",
+            "明亮酸质"
+          ],
+          "process_notes": [
+            "水洗清透",
+            "日晒果香浓郁"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "冰手冲",
+            "浅烘浓缩"
+          ],
+          "app_positioning": "花果香代表产区，适合作为精品咖啡入门与进阶风味标尺"
+        },
+        {
+          "rank": 2,
+          "country_id": "costa_rica",
+          "country": "哥斯达黎加",
+          "flag": "🇨🇷",
+          "basis_from_chart": "arrival_primary",
+          "reason": "中美洲新季到港",
+          "flavor": "蜜处理甜感友好，橙子、蜂蜜、焦糖感突出",
+          "flavor_tags": [
+            "蜂蜜",
+            "橙子",
+            "焦糖",
+            "坚果",
+            "甜感"
+          ],
+          "process_notes": [
+            "蜜处理代表性强",
+            "处理法风格丰富"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "聪明杯",
+            "奶咖"
+          ],
+          "app_positioning": "蜜处理友好，甜感突出，适合中浅到中烘"
+        },
+        {
+          "rank": 3,
+          "country_id": "guatemala",
+          "country": "危地马拉",
+          "flag": "🇬🇹",
+          "basis_from_chart": "arrival_primary",
+          "reason": "中美洲新季到港",
+          "flavor": "巧克力坚果调性厚实，适合手冲和奶咖",
+          "flavor_tags": [
+            "巧克力",
+            "坚果",
+            "烟熏/香料",
+            "柑橘",
+            "厚实"
+          ],
+          "process_notes": [
+            "水洗常见",
+            "高海拔批次结构好"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "意式",
+            "奶咖"
+          ],
+          "app_positioning": "醇厚、稳定、甜苦平衡，适合喜欢厚实口感"
+        }
+      ],
+      "title": "4月 · 本月喝什么？"
+    },
+    {
+      "month": 5,
+      "cards": [
+        {
+          "rank": 1,
+          "country_id": "ethiopia",
+          "country": "埃塞俄比亚",
+          "flag": "🇪🇹",
+          "basis_from_chart": "arrival_primary",
+          "reason": "当季新鲜到港",
+          "flavor": "花果香、茶感与明亮酸质进入最佳赏味期",
+          "flavor_tags": [
+            "花香",
+            "柑橘",
+            "莓果",
+            "茶感",
+            "明亮酸质"
+          ],
+          "process_notes": [
+            "水洗清透",
+            "日晒果香浓郁"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "冰手冲",
+            "浅烘浓缩"
+          ],
+          "app_positioning": "花果香代表产区，适合作为精品咖啡入门与进阶风味标尺"
+        },
+        {
+          "rank": 2,
+          "country_id": "panama",
+          "country": "巴拿马",
+          "flag": "🇵🇦",
+          "basis_from_chart": "arrival_primary",
+          "reason": "瑰夏季到港",
+          "flavor": "刚到港、风味巅峰，适合做高端风味亮点",
+          "flavor_tags": [
+            "茉莉花",
+            "柑橘",
+            "热带水果",
+            "蜂蜜",
+            "精致茶感"
+          ],
+          "process_notes": [
+            "瑰夏代表性强",
+            "水洗/日晒/厌氧风格差异大"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "分享壶",
+            "冰手冲"
+          ],
+          "app_positioning": "高端精品与瑰夏代表，适合做风味亮点推荐"
+        },
+        {
+          "rank": 3,
+          "country_id": "yunnan",
+          "country": "云南",
+          "flag": "🇨🇳",
+          "basis_from_chart": "arrival_primary",
+          "reason": "本土新鲜批次",
+          "flavor": "高性价比，日晒与特殊处理批次容易出彩",
+          "flavor_tags": [
+            "红糖",
+            "坚果",
+            "热带水果",
+            "发酵果香",
+            "可可"
+          ],
+          "process_notes": [
+            "水洗稳定",
+            "日晒/厌氧进步快"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "意式",
+            "奶咖"
+          ],
+          "app_positioning": "本土新鲜、价格友好，适合做本地化推荐"
+        }
+      ],
+      "title": "5月 · 本月喝什么？"
+    },
+    {
+      "month": 6,
+      "cards": [
+        {
+          "rank": 1,
+          "country_id": "panama",
+          "country": "巴拿马",
+          "flag": "🇵🇦",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季持续到港",
+          "flavor": "瑰夏与高端小批次适合集中比较风味差异",
+          "flavor_tags": [
+            "茉莉花",
+            "柑橘",
+            "热带水果",
+            "蜂蜜",
+            "精致茶感"
+          ],
+          "process_notes": [
+            "瑰夏代表性强",
+            "水洗/日晒/厌氧风格差异大"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "分享壶",
+            "冰手冲"
+          ],
+          "app_positioning": "高端精品与瑰夏代表，适合做风味亮点推荐"
+        },
+        {
+          "rank": 2,
+          "country_id": "costa_rica",
+          "country": "哥斯达黎加",
+          "flag": "🇨🇷",
+          "basis_from_chart": "arrival_primary",
+          "reason": "中美洲到港窗口",
+          "flavor": "蜜处理甜感强，适合作为甜感型手冲推荐",
+          "flavor_tags": [
+            "蜂蜜",
+            "橙子",
+            "焦糖",
+            "坚果",
+            "甜感"
+          ],
+          "process_notes": [
+            "蜜处理代表性强",
+            "处理法风格丰富"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "聪明杯",
+            "奶咖"
+          ],
+          "app_positioning": "蜜处理友好，甜感突出，适合中浅到中烘"
+        },
+        {
+          "rank": 3,
+          "country_id": "indonesia",
+          "country": "印度尼西亚",
+          "flag": "🇮🇩",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季到港开始",
+          "flavor": "低酸厚重、草本香料感，适合换口味",
+          "flavor_tags": [
+            "草本",
+            "香料",
+            "黑巧",
+            "低酸",
+            "厚重"
+          ],
+          "process_notes": [
+            "湿刨法特色",
+            "也有水洗/日晒精品批次"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "法压",
+            "奶咖"
+          ],
+          "app_positioning": "低酸厚重、草本香料感明显，适合偏醇厚口味"
+        }
+      ],
+      "title": "6月 · 本月喝什么？"
+    },
+    {
+      "month": 7,
+      "cards": [
+        {
+          "rank": 1,
+          "country_id": "panama",
+          "country": "巴拿马",
+          "flag": "🇵🇦",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季到港尾段",
+          "flavor": "适合抓住高端瑰夏和小批次的赏味窗口",
+          "flavor_tags": [
+            "茉莉花",
+            "柑橘",
+            "热带水果",
+            "蜂蜜",
+            "精致茶感"
+          ],
+          "process_notes": [
+            "瑰夏代表性强",
+            "水洗/日晒/厌氧风格差异大"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "分享壶",
+            "冰手冲"
+          ],
+          "app_positioning": "高端精品与瑰夏代表，适合做风味亮点推荐"
+        },
+        {
+          "rank": 2,
+          "country_id": "honduras",
+          "country": "洪都拉斯",
+          "flag": "🇭🇳",
+          "basis_from_chart": "arrival_primary",
+          "reason": "中美洲持续到港",
+          "flavor": "焦糖、坚果、可可调性稳定，适合日常饮用",
+          "flavor_tags": [
+            "焦糖",
+            "坚果",
+            "可可",
+            "橙皮",
+            "圆润"
+          ],
+          "process_notes": [
+            "水洗常见",
+            "日常口粮友好"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "意式",
+            "奶咖"
+          ],
+          "app_positioning": "中美洲性价比产区，适合均衡型日常饮用"
+        },
+        {
+          "rank": 3,
+          "country_id": "indonesia",
+          "country": "印度尼西亚",
+          "flag": "🇮🇩",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季新鲜到港",
+          "flavor": "厚重低酸，适合手冲、法压或奶咖",
+          "flavor_tags": [
+            "草本",
+            "香料",
+            "黑巧",
+            "低酸",
+            "厚重"
+          ],
+          "process_notes": [
+            "湿刨法特色",
+            "也有水洗/日晒精品批次"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "法压",
+            "奶咖"
+          ],
+          "app_positioning": "低酸厚重、草本香料感明显，适合偏醇厚口味"
+        }
+      ],
+      "title": "7月 · 本月喝什么？"
+    },
+    {
+      "month": 8,
+      "cards": [
+        {
+          "rank": 1,
+          "country_id": "rwanda",
+          "country": "卢旺达",
+          "flag": "🇷🇼",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季新鲜到港",
+          "flavor": "红茶、红糖、红色浆果，东非风味但更柔和",
+          "flavor_tags": [
+            "红茶",
+            "红糖",
+            "红色浆果",
+            "柑橘",
+            "干净"
+          ],
+          "process_notes": [
+            "水洗常见",
+            "甜感稳定"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "法压",
+            "美式"
+          ],
+          "app_positioning": "东非系但更柔和，兼具茶感与甜感"
+        },
+        {
+          "rank": 2,
+          "country_id": "kenya",
+          "country": "肯尼亚",
+          "flag": "🇰🇪",
+          "basis_from_chart": "arrival_secondary",
+          "reason": "副季到港",
+          "flavor": "小批次可补充清爽高酸风味，适合冰饮",
+          "flavor_tags": [
+            "黑加仑",
+            "番茄/乌梅酸",
+            "葡萄柚",
+            "高酸",
+            "高甜感"
+          ],
+          "process_notes": [
+            "水洗常见",
+            "酸甜结构强"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "冰手冲",
+            "美式"
+          ],
+          "app_positioning": "酸质明亮、层次强，适合喜欢清爽冲击感的人"
+        },
+        {
+          "rank": 3,
+          "country_id": "colombia",
+          "country": "哥伦比亚",
+          "flag": "🇨🇴",
+          "basis_from_chart": "arrival_secondary",
+          "reason": "副季到港",
+          "flavor": "可选微批次与特殊处理，风味变化丰富",
+          "flavor_tags": [
+            "焦糖",
+            "坚果",
+            "红果",
+            "柑橘",
+            "均衡"
+          ],
+          "process_notes": [
+            "水洗常见",
+            "厌氧/特殊处理选择多"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "意式",
+            "奶咖"
+          ],
+          "app_positioning": "全年存在感强，均衡、稳定、可玩性高"
+        }
+      ],
+      "title": "8月 · 本月喝什么？"
+    },
+    {
+      "month": 9,
+      "cards": [
+        {
+          "rank": 1,
+          "country_id": "peru",
+          "country": "秘鲁",
+          "flag": "🇵🇪",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季新鲜到港",
+          "flavor": "干净、柔和、蜂蜜坚果感，适合日常口粮",
+          "flavor_tags": [
+            "坚果",
+            "巧克力",
+            "蜂蜜",
+            "温和果酸",
+            "干净"
+          ],
+          "process_notes": [
+            "水洗常见",
+            "有机/小农批次多"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "法压",
+            "奶咖"
+          ],
+          "app_positioning": "柔和、干净、性价比友好，适合日常口粮"
+        },
+        {
+          "rank": 2,
+          "country_id": "rwanda",
+          "country": "卢旺达",
+          "flag": "🇷🇼",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季持续到港",
+          "flavor": "茶感和红果调稳定，适合温柔型手冲",
+          "flavor_tags": [
+            "红茶",
+            "红糖",
+            "红色浆果",
+            "柑橘",
+            "干净"
+          ],
+          "process_notes": [
+            "水洗常见",
+            "甜感稳定"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "法压",
+            "美式"
+          ],
+          "app_positioning": "东非系但更柔和，兼具茶感与甜感"
+        },
+        {
+          "rank": 3,
+          "country_id": "colombia",
+          "country": "哥伦比亚",
+          "flag": "🇨🇴",
+          "basis_from_chart": "arrival_secondary",
+          "reason": "副季持续到港",
+          "flavor": "均衡且选择多，适合做豆仓常备款",
+          "flavor_tags": [
+            "焦糖",
+            "坚果",
+            "红果",
+            "柑橘",
+            "均衡"
+          ],
+          "process_notes": [
+            "水洗常见",
+            "厌氧/特殊处理选择多"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "意式",
+            "奶咖"
+          ],
+          "app_positioning": "全年存在感强，均衡、稳定、可玩性高"
+        }
+      ],
+      "title": "9月 · 本月喝什么？"
+    },
+    {
+      "month": 10,
+      "cards": [
+        {
+          "rank": 1,
+          "country_id": "peru",
+          "country": "秘鲁",
+          "flag": "🇵🇪",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季到港窗口",
+          "flavor": "温和干净、性价比友好，适合秋季日常饮用",
+          "flavor_tags": [
+            "坚果",
+            "巧克力",
+            "蜂蜜",
+            "温和果酸",
+            "干净"
+          ],
+          "process_notes": [
+            "水洗常见",
+            "有机/小农批次多"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "法压",
+            "奶咖"
+          ],
+          "app_positioning": "柔和、干净、性价比友好，适合日常口粮"
+        },
+        {
+          "rank": 2,
+          "country_id": "brazil",
+          "country": "巴西",
+          "flag": "🇧🇷",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季新鲜到港",
+          "flavor": "坚果、巧克力、低酸，适合意式与奶咖",
+          "flavor_tags": [
+            "坚果",
+            "巧克力",
+            "奶油",
+            "低酸",
+            "焦糖"
+          ],
+          "process_notes": [
+            "日晒/半日晒常见",
+            "意式拼配基础产区"
+          ],
+          "recommended_brewing": [
+            "意式",
+            "奶咖",
+            "冷萃"
+          ],
+          "app_positioning": "低酸、坚果巧克力调性，适合意式和日常奶咖"
+        },
+        {
+          "rank": 3,
+          "country_id": "rwanda",
+          "country": "卢旺达",
+          "flag": "🇷🇼",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季到港尾段",
+          "flavor": "红茶感与甜感依然稳定，适合手冲收尾",
+          "flavor_tags": [
+            "红茶",
+            "红糖",
+            "红色浆果",
+            "柑橘",
+            "干净"
+          ],
+          "process_notes": [
+            "水洗常见",
+            "甜感稳定"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "法压",
+            "美式"
+          ],
+          "app_positioning": "东非系但更柔和，兼具茶感与甜感"
+        }
+      ],
+      "title": "10月 · 本月喝什么？"
+    },
+    {
+      "month": 11,
+      "cards": [
+        {
+          "rank": 1,
+          "country_id": "brazil",
+          "country": "巴西",
+          "flag": "🇧🇷",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季持续到港",
+          "flavor": "低酸、坚果巧克力，适合意式拼配和拿铁",
+          "flavor_tags": [
+            "坚果",
+            "巧克力",
+            "奶油",
+            "低酸",
+            "焦糖"
+          ],
+          "process_notes": [
+            "日晒/半日晒常见",
+            "意式拼配基础产区"
+          ],
+          "recommended_brewing": [
+            "意式",
+            "奶咖",
+            "冷萃"
+          ],
+          "app_positioning": "低酸、坚果巧克力调性，适合意式和日常奶咖"
+        },
+        {
+          "rank": 2,
+          "country_id": "ecuador",
+          "country": "厄瓜多尔",
+          "flag": "🇪🇨",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季新鲜到港",
+          "flavor": "小众精品感强，热带水果与花香值得探索",
+          "flavor_tags": [
+            "热带水果",
+            "花香",
+            "可可",
+            "蜂蜜",
+            "干净甜感"
+          ],
+          "process_notes": [
+            "小批次精品潜力高",
+            "处理法多样"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "冰手冲",
+            "分享壶"
+          ],
+          "app_positioning": "小众精品感强，适合做探索型推荐"
+        },
+        {
+          "rank": 3,
+          "country_id": "peru",
+          "country": "秘鲁",
+          "flag": "🇵🇪",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季到港尾段",
+          "flavor": "温和耐喝，适合作为豆仓补货与口粮豆",
+          "flavor_tags": [
+            "坚果",
+            "巧克力",
+            "蜂蜜",
+            "温和果酸",
+            "干净"
+          ],
+          "process_notes": [
+            "水洗常见",
+            "有机/小农批次多"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "法压",
+            "奶咖"
+          ],
+          "app_positioning": "柔和、干净、性价比友好，适合日常口粮"
+        }
+      ],
+      "title": "11月 · 本月喝什么？"
+    },
+    {
+      "month": 12,
+      "cards": [
+        {
+          "rank": 1,
+          "country_id": "brazil",
+          "country": "巴西",
+          "flag": "🇧🇷",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季到港尾段",
+          "flavor": "奶油、坚果、巧克力调性适合冬季奶咖",
+          "flavor_tags": [
+            "坚果",
+            "巧克力",
+            "奶油",
+            "低酸",
+            "焦糖"
+          ],
+          "process_notes": [
+            "日晒/半日晒常见",
+            "意式拼配基础产区"
+          ],
+          "recommended_brewing": [
+            "意式",
+            "奶咖",
+            "冷萃"
+          ],
+          "app_positioning": "低酸、坚果巧克力调性，适合意式和日常奶咖"
+        },
+        {
+          "rank": 2,
+          "country_id": "ecuador",
+          "country": "厄瓜多尔",
+          "flag": "🇪🇨",
+          "basis_from_chart": "arrival_primary",
+          "reason": "主季持续到港",
+          "flavor": "花果香与可可甜感并存，适合探索型手冲",
+          "flavor_tags": [
+            "热带水果",
+            "花香",
+            "可可",
+            "蜂蜜",
+            "干净甜感"
+          ],
+          "process_notes": [
+            "小批次精品潜力高",
+            "处理法多样"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "冰手冲",
+            "分享壶"
+          ],
+          "app_positioning": "小众精品感强，适合做探索型推荐"
+        },
+        {
+          "rank": 3,
+          "country_id": "ethiopia",
+          "country": "埃塞俄比亚",
+          "flag": "🇪🇹",
+          "basis_from_chart": "harvest_primary",
+          "reason": "新采收季开始",
+          "flavor": "关注新季花果香批次，适合做后续到港提醒",
+          "flavor_tags": [
+            "花香",
+            "柑橘",
+            "莓果",
+            "茶感",
+            "明亮酸质"
+          ],
+          "process_notes": [
+            "水洗清透",
+            "日晒果香浓郁"
+          ],
+          "recommended_brewing": [
+            "手冲",
+            "冰手冲",
+            "浅烘浓缩"
+          ],
+          "app_positioning": "花果香代表产区，适合作为精品咖啡入门与进阶风味标尺"
+        }
+      ],
+      "title": "12月 · 本月喝什么？"
+    }
+  ],
+  "monthly_status_index": [
+    {
+      "month": 1,
+      "harvest_primary": [
+        "ethiopia",
+        "panama",
+        "costa_rica",
+        "honduras",
+        "guatemala",
+        "yunnan",
+        "indonesia"
+      ],
+      "harvest_secondary": [],
+      "arrival_primary": [
+        "colombia"
+      ],
+      "arrival_secondary": []
+    },
+    {
+      "month": 2,
+      "harvest_primary": [
+        "panama",
+        "costa_rica",
+        "honduras",
+        "guatemala",
+        "yunnan",
+        "indonesia"
+      ],
+      "harvest_secondary": [],
+      "arrival_primary": [
+        "kenya",
+        "colombia"
+      ],
+      "arrival_secondary": []
+    },
+    {
+      "month": 3,
+      "harvest_primary": [
+        "rwanda",
+        "panama",
+        "costa_rica",
+        "honduras",
+        "guatemala",
+        "indonesia"
+      ],
+      "harvest_secondary": [],
+      "arrival_primary": [
+        "ethiopia",
+        "kenya",
+        "colombia",
+        "yunnan"
+      ],
+      "arrival_secondary": []
+    },
+    {
+      "month": 4,
+      "harvest_primary": [
+        "rwanda",
+        "peru"
+      ],
+      "harvest_secondary": [
+        "colombia"
+      ],
+      "arrival_primary": [
+        "ethiopia",
+        "kenya",
+        "costa_rica",
+        "honduras",
+        "guatemala",
+        "yunnan"
+      ],
+      "arrival_secondary": []
+    },
+    {
+      "month": 5,
+      "harvest_primary": [
+        "rwanda",
+        "peru",
+        "brazil",
+        "ecuador"
+      ],
+      "harvest_secondary": [
+        "colombia"
+      ],
+      "arrival_primary": [
+        "ethiopia",
+        "panama",
+        "costa_rica",
+        "honduras",
+        "guatemala",
+        "yunnan",
+        "indonesia"
+      ],
+      "arrival_secondary": []
+    },
+    {
+      "month": 6,
+      "harvest_primary": [
+        "rwanda",
+        "peru",
+        "brazil",
+        "ecuador"
+      ],
+      "harvest_secondary": [
+        "kenya",
+        "colombia"
+      ],
+      "arrival_primary": [
+        "panama",
+        "costa_rica",
+        "honduras",
+        "guatemala",
+        "indonesia"
+      ],
+      "arrival_secondary": []
+    },
+    {
+      "month": 7,
+      "harvest_primary": [
+        "rwanda",
+        "peru",
+        "brazil",
+        "ecuador"
+      ],
+      "harvest_secondary": [
+        "kenya"
+      ],
+      "arrival_primary": [
+        "panama",
+        "honduras",
+        "guatemala",
+        "indonesia"
+      ],
+      "arrival_secondary": []
+    },
+    {
+      "month": 8,
+      "harvest_primary": [
+        "peru",
+        "brazil",
+        "ecuador"
+      ],
+      "harvest_secondary": [],
+      "arrival_primary": [
+        "rwanda",
+        "indonesia"
+      ],
+      "arrival_secondary": [
+        "kenya",
+        "colombia"
+      ]
+    },
+    {
+      "month": 9,
+      "harvest_primary": [
+        "colombia",
+        "ecuador"
+      ],
+      "harvest_secondary": [],
+      "arrival_primary": [
+        "rwanda",
+        "peru"
+      ],
+      "arrival_secondary": [
+        "kenya",
+        "colombia"
+      ]
+    },
+    {
+      "month": 10,
+      "harvest_primary": [
+        "ethiopia",
+        "kenya",
+        "colombia"
+      ],
+      "harvest_secondary": [],
+      "arrival_primary": [
+        "rwanda",
+        "peru",
+        "brazil",
+        "ecuador"
+      ],
+      "arrival_secondary": [
+        "colombia"
+      ]
+    },
+    {
+      "month": 11,
+      "harvest_primary": [
+        "ethiopia",
+        "kenya",
+        "colombia",
+        "honduras",
+        "yunnan",
+        "indonesia"
+      ],
+      "harvest_secondary": [],
+      "arrival_primary": [
+        "peru",
+        "brazil",
+        "ecuador"
+      ],
+      "arrival_secondary": []
+    },
+    {
+      "month": 12,
+      "harvest_primary": [
+        "ethiopia",
+        "kenya",
+        "colombia",
+        "costa_rica",
+        "honduras",
+        "guatemala",
+        "yunnan",
+        "indonesia"
+      ],
+      "harvest_secondary": [],
+      "arrival_primary": [
+        "brazil",
+        "ecuador"
+      ],
+      "arrival_secondary": []
+    }
+  ],
+  "development_notes": {
+    "recommendation_priority": [
+      "arrival_primary",
+      "arrival_secondary",
+      "harvest_primary",
+      "harvest_secondary"
+    ],
+    "usage": "首页按 currentMonth 读取 monthly_recommendations；产区详情页读取 countries + origin_attributes；日历视图读取 monthly_status_index。",
+    "data_granularity": "图中横条已按整月归并；到港与最佳赏味期会因船期、清关、烘焙排期、处理法不同产生 1–2 个月浮动。"
+  }
+}

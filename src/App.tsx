@@ -6,6 +6,7 @@ import { OfflineBanner } from './components/layout/OfflineBanner';
 import { HomePage } from './pages/HomePage';
 import { AddBeanPage } from './pages/AddBeanPage';
 import { BeanDetailPage } from './pages/BeanDetailPage';
+import { BeanCalendarPage } from './pages/BeanCalendarPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { useSyncOnStartup } from './hooks/useSync';
 import { useBeanStore } from './store/beanStore';
@@ -37,6 +38,7 @@ function AppShell() {
         <Route path="/" element={<HomePage />} />
         <Route path="/add" element={<AddBeanPage />} />
         <Route path="/bean/:id" element={<BeanDetailPage />} />
+        <Route path="/calendar" element={<BeanCalendarPage />} />
         <Route path="/settings" element={<SettingsPage />} />
       </Routes>
       <BottomNav />

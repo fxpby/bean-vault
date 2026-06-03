@@ -1,0 +1,406 @@
+{
+  "title": "全球咖啡采收日历",
+  "subtitle": "Harvest → Arrival in China / 斜条纹 = 副季",
+  "source_image": "IMG_2463.JPG",
+  "extraction_note": "根据图片视觉解析；横条按覆盖月份转为整月区间，到港时间为精品豆到中国市场的大致窗口，实际因处理方式和物流有 1–2 个月浮动。",
+  "legend": {
+    "harvest_primary": {
+      "label_zh": "采收（主季）",
+      "visual": "orange_solid"
+    },
+    "harvest_secondary": {
+      "label_zh": "采收（副季）",
+      "visual": "orange_diagonal_stripe"
+    },
+    "arrival_primary": {
+      "label_zh": "到港（主季）",
+      "visual": "teal_solid"
+    },
+    "arrival_secondary": {
+      "label_zh": "到港（副季）",
+      "visual": "teal_diagonal_stripe"
+    }
+  },
+  "months": [
+    {
+      "num": 1,
+      "zh": "1月"
+    },
+    {
+      "num": 2,
+      "zh": "2月"
+    },
+    {
+      "num": 3,
+      "zh": "3月"
+    },
+    {
+      "num": 4,
+      "zh": "4月"
+    },
+    {
+      "num": 5,
+      "zh": "5月"
+    },
+    {
+      "num": 6,
+      "zh": "6月"
+    },
+    {
+      "num": 7,
+      "zh": "7月"
+    },
+    {
+      "num": 8,
+      "zh": "8月"
+    },
+    {
+      "num": 9,
+      "zh": "9月"
+    },
+    {
+      "num": 10,
+      "zh": "10月"
+    },
+    {
+      "num": 11,
+      "zh": "11月"
+    },
+    {
+      "num": 12,
+      "zh": "12月"
+    }
+  ],
+  "featured_month": {
+    "month": 5,
+    "title": "5月 · 本月喝什么？",
+    "cards": [
+      {
+        "country": "埃塞俄比亚",
+        "flag": "🇪🇹",
+        "reason": "当季新鲜到港",
+        "flavor": "花果香、最佳赏味期"
+      },
+      {
+        "country": "巴拿马",
+        "flag": "🇵🇦",
+        "reason": "瑰夏季",
+        "flavor": "刚到港、风味巅峰"
+      },
+      {
+        "country": "云南",
+        "flag": "🇨🇳",
+        "reason": "本土新鲜批次",
+        "flavor": "高性价比、日晒出彩"
+      }
+    ]
+  },
+  "countries": [
+    {
+      "id": "ethiopia",
+      "name_zh": "埃塞俄比亚",
+      "flag": "🇪🇹",
+      "harvest": {
+        "primary": [
+          1,
+          10,
+          11,
+          12
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          3,
+          4,
+          5
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "kenya",
+      "name_zh": "肯尼亚",
+      "flag": "🇰🇪",
+      "harvest": {
+        "primary": [
+          10,
+          11,
+          12
+        ],
+        "secondary": [
+          6,
+          7
+        ]
+      },
+      "arrival": {
+        "primary": [
+          2,
+          3,
+          4
+        ],
+        "secondary": [
+          8,
+          9
+        ]
+      }
+    },
+    {
+      "id": "rwanda",
+      "name_zh": "卢旺达",
+      "flag": "🇷🇼",
+      "harvest": {
+        "primary": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          8,
+          9,
+          10
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "colombia",
+      "name_zh": "哥伦比亚",
+      "flag": "🇨🇴",
+      "harvest": {
+        "primary": [
+          9,
+          10,
+          11,
+          12
+        ],
+        "secondary": [
+          4,
+          5,
+          6
+        ]
+      },
+      "arrival": {
+        "primary": [
+          1,
+          2,
+          3
+        ],
+        "secondary": [
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "id": "peru",
+      "name_zh": "秘鲁",
+      "flag": "🇵🇪",
+      "harvest": {
+        "primary": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          9,
+          10,
+          11
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "panama",
+      "name_zh": "巴拿马",
+      "flag": "🇵🇦",
+      "harvest": {
+        "primary": [
+          1,
+          2,
+          3
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          5,
+          6,
+          7
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "costa_rica",
+      "name_zh": "哥斯达黎加",
+      "flag": "🇨🇷",
+      "harvest": {
+        "primary": [
+          1,
+          2,
+          3,
+          12
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          4,
+          5,
+          6
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "honduras",
+      "name_zh": "洪都拉斯",
+      "flag": "🇭🇳",
+      "harvest": {
+        "primary": [
+          1,
+          2,
+          3,
+          11,
+          12
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "guatemala",
+      "name_zh": "危地马拉",
+      "flag": "🇬🇹",
+      "harvest": {
+        "primary": [
+          1,
+          2,
+          3,
+          12
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "brazil",
+      "name_zh": "巴西",
+      "flag": "🇧🇷",
+      "harvest": {
+        "primary": [
+          5,
+          6,
+          7,
+          8
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          10,
+          11,
+          12
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "yunnan",
+      "name_zh": "云南",
+      "flag": "🇨🇳",
+      "harvest": {
+        "primary": [
+          1,
+          2,
+          11,
+          12
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          3,
+          4,
+          5
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "indonesia",
+      "name_zh": "印度尼西亚",
+      "flag": "🇮🇩",
+      "harvest": {
+        "primary": [
+          1,
+          2,
+          3,
+          11,
+          12
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          5,
+          6,
+          7,
+          8
+        ],
+        "secondary": []
+      }
+    },
+    {
+      "id": "ecuador",
+      "name_zh": "厄瓜多尔",
+      "flag": "🇪🇨",
+      "harvest": {
+        "primary": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "secondary": []
+      },
+      "arrival": {
+        "primary": [
+          10,
+          11,
+          12
+        ],
+        "secondary": []
+      }
+    }
+  ]
+}
