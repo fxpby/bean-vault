@@ -29,6 +29,7 @@ export function BeanDetailPage() {
   const [editForm, setEditForm] = useState<Partial<BeanFormData>>({});
   const [countrySearch, setCountrySearch] = useState('');
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+  const [newFlavorInput, setNewFlavorInput] = useState('');
 
   if (!bean) {
     return (
@@ -94,6 +95,18 @@ export function BeanDetailPage() {
     setIsEditing(false);
   };
 
+  const addFlavorNote = () => {
+    const note = newFlavorInput.trim();
+    if (!note) return;
+    const current = editForm.flavorNotes || bean.flavorNotes;
+    if (current.includes(note)) {
+      showToast('风味已存在', 'error');
+      return;
+    }
+    setEditForm({ ...editForm, flavorNotes: [...current, note] });
+    setNewFlavorInput('');
+  };
+
   const flag = bean.countryCode
     ? String.fromCodePoint(...[...bean.countryCode.toUpperCase()].map(c => 0x1F1E6 + c.charCodeAt(0) - 65))
     : '';
@@ -141,6 +154,7 @@ export function BeanDetailPage() {
                   status: bean.status,
                 });
                 setCountrySearch(bean.country);
+                setNewFlavorInput('');
                 setIsEditing(true);
               }}
               className="px-3 py-1.5 text-sm text-ink-muted rounded-lg
@@ -425,6 +439,29 @@ export function BeanDetailPage() {
                     </button>
                   </span>
                 ))}
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 text-sm
+                  bg-surface-card text-ink-muted rounded-lg border border-dashed border-hairline">
+                  <input
+                    type="text"
+                    value={newFlavorInput}
+                    onChange={(e) => setNewFlavorInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        addFlavorNote();
+                      }
+                    }}
+                    placeholder="添加风味"
+                    className="w-20 text-sm bg-transparent outline-none placeholder:text-ink-muted/50"
+                  />
+                  <button onClick={addFlavorNote}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      strokeWidth="2" strokeLinecap="round">
+                      <line x1="12" y1="5" x2="12" y2="19" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                  </button>
+                </span>
               </div>
             ) : (
               <div className="flex flex-wrap gap-1.5">
