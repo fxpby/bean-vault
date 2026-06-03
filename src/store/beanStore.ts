@@ -57,6 +57,37 @@ const localforageStorage = {
   },
 };
 
+/**
+ * Detects if there's a data conflict between local and remote beans.
+ * Returns true if:
+ * - ID sets differ (different size or different IDs)
+ * - Any bean with the same ID has different updatedAt
+ * Returns false only when all IDs match and all updatedAt values match.
+ */
+function hasDataConflict(localBeans: Bean[], remoteBeans: Bean[]): boolean {
+  // Build maps: id -> updatedAt
+  const localMap = new Map(localBeans.map((b) => [b.id, b.updatedAt]));
+  const remoteMap = new Map(remoteBeans.map((b) => [b.id, b.updatedAt]));
+
+  // Check if ID sets differ
+  if (localMap.size !== remoteMap.size) {
+    return true;
+  }
+
+  // Check if any bean with the same ID has different updatedAt
+  // (Size equality guarantees that if all local IDs exist in remote, then they're identical sets)
+  for (const [id, localUpdatedAt] of localMap.entries()) {
+    const remoteUpdatedAt = remoteMap.get(id);
+    // If remote doesn't have this ID, or updatedAt differs, it's a conflict
+    if (remoteUpdatedAt === undefined || remoteUpdatedAt !== localUpdatedAt) {
+      return true;
+    }
+  }
+
+  // All checks passed — no conflict
+  return false;
+}
+
 export const useBeanStore = create<BeanStore>()(
   persist(
     (set, get) => ({
@@ -197,16 +228,21 @@ export const useBeanStore = create<BeanStore>()(
             } else if (get().pendingMerge) {
               // Already has a pending merge dialog open — skip auto-merge
             } else {
-              // Both local and remote have data — set pending merge for user resolution
-              set({
-                pendingMerge: {
-                  localTotal: localBeans.length,
-                  localDeleted: localBeans.filter((b) => b.isDeleted).length,
-                  remoteTotal: remoteBeans.length,
-                  remoteDeleted: remoteBeans.filter((b) => b.isDeleted).length,
-                  remoteBeans,
-                },
-              });
+              // Both local and remote have data — check if there's an actual conflict
+              const hasConflict = hasDataConflict(localBeans, remoteBeans);
+              if (hasConflict) {
+                // Set pending merge for user resolution
+                set({
+                  pendingMerge: {
+                    localTotal: localBeans.length,
+                    localDeleted: localBeans.filter((b) => b.isDeleted).length,
+                    remoteTotal: remoteBeans.length,
+                    remoteDeleted: remoteBeans.filter((b) => b.isDeleted).length,
+                    remoteBeans,
+                  },
+                });
+              }
+              // If no conflict, data is already in sync — do nothing
             }
           }
         } catch (err) {
