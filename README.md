@@ -1,20 +1,32 @@
-# BeanVault 豆仓
+# BeanVault 豆仓 ☕️
 
 移动端 PWA 咖啡豆库存管理应用，核心功能是**养豆期自动计算** — 追踪每包豆子的最佳饮用窗口。
 
+## 功能
+
+- 豆子增删改查，支持分类（手冲/意式/订阅）和多种筛选
+- 养豆期自动计算：根据生产日期 + 养豆天数，标记是否已达最佳赏味期
+- 四种状态管理：架子上 / 冰箱 / 正在喝 / 已喝完
+- 回收站软删除，支持恢复和永久删除
+- 多维度排序：默认 / 生产日期 / 养豆状态
+- 即时搜索（无 debounce，数据在内存中 < 200 条）
+- JSON 导入/导出（合并 / 替换策略）
+- Supabase 云同步：登录后本地与云端双向同步
+- 离线优先：离线时数据存 IndexedDB，联网后自动重试
+- PWA 支持，可安装到桌面
+
 ## 技术栈
 
-| 层 | 技术 |
-|---|------|
-| 框架 | React 18 + TypeScript |
-| 构建 | Vite 6 |
-| 路由 | React Router v7 |
-| 状态管理 | Zustand (persist → localforage → IndexedDB) |
-| UI | Tailwind CSS v4 + Radix UI 原语 |
-| 动画 | Motion |
-| 后端 | Supabase (Auth + PostgreSQL + RLS) |
-| 认证 | 邮箱 OTP 验证码 |
-| PWA | vite-plugin-pwa (Workbox) |
+| 层       | 技术                                         |
+| -------- | -------------------------------------------- |
+| 框架     | React 18 + TypeScript                        |
+| 构建     | Vite 6                                       |
+| 路由     | React Router v7                              |
+| 状态管理 | Zustand（persist → localforage → IndexedDB） |
+| UI       | Tailwind CSS v4 + Radix UI                   |
+| 后端     | Supabase（Auth + PostgreSQL + RLS）          |
+| 认证     | 邮箱 + 密码登录                              |
+| PWA      | vite-plugin-pwa（Workbox）                   |
 
 ## 快速开始
 
@@ -41,31 +53,35 @@ VITE_SUPABASE_ANON_KEY=your-anon-key
 
 在 Supabase SQL Editor 中执行 `supabase/migrations/001_create_beans.sql` 创建 `beans` 表并配置 RLS。
 
+同时需要在 Supabase Dashboard → Authentication → Providers 中启用 Email 登录。
+
+若使用官方托管，有邮件速率限制，可在 Supabase Dashboard → Authentication → Providers 关闭 Confirm email。
+
 ## 项目结构
 
 ```
 src/
-├── types/bean.ts            # Bean 类型定义
-├── constants/index.ts        # 产国列表、风味词库、标签映射
-├── utils/resting.ts          # 养豆计算、筛选、排序
-├── store/beanStore.ts        # Zustand store + 双向同步
+├── types/bean.ts              # Bean 类型定义（含 MergeInfo 同步类型）
+├── constants/index.ts          # 产国列表、风味词库、标签映射
+├── utils/resting.ts            # 养豆计算、筛选、排序
+├── store/beanStore.ts          # Zustand store + 同步冲突检测
 ├── supabase/
-│   ├── client.ts             # Supabase 客户端 + Auth
-│   └── sync.ts               # 数据 CRUD 操作
+│   ├── client.ts               # Supabase 客户端 + Auth
+│   └── sync.ts                 # 数据 CRUD 操作
 ├── hooks/
-│   ├── useFilteredBeans.ts   # 筛选/搜索/排序状态
-│   ├── useOnlineStatus.ts    # 离线检测
-│   └── useSync.ts            # 启动同步
+│   ├── useFilteredBeans.ts     # 筛选/搜索/排序状态
+│   ├── useOnlineStatus.ts      # 离线检测
+│   └── useSync.ts              # 启动同步 + 登录后自动同步
 ├── components/
-│   ├── ui/                   # Toast, Dialog, SearchBar, EmptyState
-│   ├── bean/                 # BeanCard, RestingBadge
-│   └── layout/               # BottomNav, TabBar, OfflineBanner
+│   ├── ui/                     # Toast, Dialog, SearchBar, EmptyState
+│   ├── bean/                   # BeanCard, RestingBadge
+│   └── layout/                 # BottomNav, TabBar, OfflineBanner
 ├── pages/
-│   ├── HomePage.tsx          # 首页（列表 + 筛选 + FAB）
-│   ├── AddBeanPage.tsx       # 添加豆子表单
-│   ├── BeanDetailPage.tsx    # 豆子详情/编辑
-│   └── SettingsPage.tsx      # 设置（导入导出/云同步）
-└── App.tsx                   # 路由 + Provider
+│   ├── HomePage.tsx            # 首页（列表 + 筛选 + FAB）
+│   ├── AddBeanPage.tsx         # 添加豆子表单
+│   ├── BeanDetailPage.tsx      # 豆子详情/编辑
+│   └── SettingsPage.tsx        # 设置（导入导出/登录/云同步）
+└── App.tsx                     # 路由 + Provider + 同步冲突弹窗
 ```
 
 ## 脚本
@@ -83,14 +99,36 @@ npm run lint      # 代码检查
 ```
 本地增删改 → IndexedDB 乐观更新 → 推送 Supabase
                                 ↘ 离线 → syncQueue → 联网重试
-启动时 → fetchRemoteBeans → updatedAt 比较 → 新的覆盖旧的
+
+启动/登录 → fetchRemoteBeans → 本地 vs 云端对比：
+  ├─ 云端为空 → 本地数据推送到云端（首次同步）
+  ├─ 本地为空 → 下载云端数据
+  └─ 双方有数据 → 弹出冲突确认弹窗，用户选择：
+                    ├─ 使用本地数据（覆盖云端）
+                    ├─ 使用云端数据（覆盖本地）
+                    └─ 合并数据（updatedAt 最后写入优先）
 ```
 
-未登录时所有数据仅存本地 IndexedDB，登录后自动推送并合并。
+未登录时所有数据仅存本地 IndexedDB，登录后弹出冲突确认弹窗供用户选择同步方向。
+
+## 领域模型
+
+| 状态       | 含义             |
+| ---------- | ---------------- |
+| `shelf`    | 架子上，等待开喝 |
+| `fridge`   | 冰箱冷冻储存     |
+| `drinking` | 正在喝           |
+| `finished` | 已喝完           |
+
+养豆计算（前端推导，不存储）：
+
+- `restedDate = productionDate + restingDays`
+- `isRested = today >= restedDate`
+- 当 `isRested && status === 'shelf'` 时，卡片显示"开始喝"快捷按钮
 
 ## 设计
 
-设计 token 基于暖奶油色 + 珊瑚色咖啡主题，映射自 Claude.com 设计系统。详见 `DESIGN.md`。
+设计 token 基于暖奶油色 + 珊瑚色咖啡主题。映射自 Claude.com 设计系统。详见 `DESIGN.md`。
 
 ## License
 
