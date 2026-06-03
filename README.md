@@ -18,7 +18,17 @@
 
 ## 截图
 
-截图敬请期待
+![空豆仓](<https://fxpby.oss-cn-beijing.aliyuncs.com/project/bean-vault/empty-vault_(iPhone%2014%20Pro%20Max).png>)
+
+![豆仓列表](<https://fxpby.oss-cn-beijing.aliyuncs.com/project/bean-vault/%E8%B1%86%E4%BB%93%E5%88%97%E8%A1%A8_(iPhone%2014%20Pro%20Max).png>)
+
+![豆历](<https://fxpby.oss-cn-beijing.aliyuncs.com/project/bean-vault/%E8%B1%86%E5%8E%86_(iPhone%2014%20Pro%20Max).png>)
+
+![设置](<https://fxpby.oss-cn-beijing.aliyuncs.com/project/bean-vault/%E8%AE%BE%E7%BD%AE_(iPhone%2014%20Pro%20Max).png>)
+
+![豆子详情](<https://fxpby.oss-cn-beijing.aliyuncs.com/project/bean-vault/%E8%B1%86%E5%AD%90%E8%AF%A6%E6%83%85_(iPhone%2014%20Pro%20Max).png>)
+
+![添加豆子](<https://fxpby.oss-cn-beijing.aliyuncs.com/project/bean-vault/%E6%B7%BB%E5%8A%A0%E8%B1%86%E5%AD%90_(iPhone%2014%20Pro%20Max).png>)
 
 ## 技术栈
 
@@ -85,6 +95,7 @@ VITE_SUPABASE_ANON_KEY=your-anon-key
 ### PWA 安装
 
 部署完成后，访问你的应用 URL：
+
 - 移动设备：浏览器会提示"添加到主屏幕"
 - 桌面浏览器：地址栏右侧会显示安装图标
 

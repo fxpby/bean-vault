@@ -71,3 +71,36 @@
 ### Next Steps
 
 - None - task complete
+
+
+## Session 3: README.md 文档补充 - 环境要求和部署指南
+
+**Date**: 2026-06-03
+**Task**: README.md 文档补充 - 环境要求和部署指南
+**Branch**: `main`
+
+### Summary
+
+更新 README.md 文档，添加豆历功能说明、截图章节占位、环境要求（Node.js 18+、浏览器兼容性）、部署指南（Vercel 部署步骤和 PWA 安装说明）
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `e88334d` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
