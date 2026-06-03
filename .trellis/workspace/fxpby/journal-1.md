@@ -38,3 +38,36 @@
 ### Next Steps
 
 - None - task complete
+
+
+## Session 2: 豆历页面 UI 优化 - 月份选择器两行布局和矩阵图数字标签
+
+**Date**: 2026-06-03
+**Task**: 豆历页面 UI 优化 - 月份选择器两行布局和矩阵图数字标签
+**Branch**: `main`
+
+### Summary
+
+优化豆历页面两个 UI 问题：(1) 月份选择器改为两行布局（1-6月/7-12月），移除横向滚动；(2) 矩阵图月份标题改为纯数字（1~12），统一列宽视觉效果。提升移动端用户体验。
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `37d0cca` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete

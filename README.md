@@ -14,6 +14,11 @@
 - Supabase 云同步：登录后本地与云端双向同步
 - 离线优先：离线时数据存 IndexedDB，联网后自动重试
 - PWA 支持，可安装到桌面
+- 豆历：全球咖啡产区采收日历，可视化展示各产国最佳采收期和到港时间
+
+## 截图
+
+截图敬请期待
 
 ## 技术栈
 
@@ -27,6 +32,15 @@
 | 后端     | Supabase（Auth + PostgreSQL + RLS）          |
 | 认证     | 邮箱 + 密码登录                              |
 | PWA      | vite-plugin-pwa（Workbox）                   |
+
+## 环境要求
+
+- **Node.js**: 18+ (Vite 6 要求)
+- **浏览器**: 支持 IndexedDB 和 Service Worker 的现代浏览器
+  - Chrome 88+
+  - Firefox 87+
+  - Safari 14+
+  - Edge 88+
 
 ## 快速开始
 
@@ -56,6 +70,25 @@ VITE_SUPABASE_ANON_KEY=your-anon-key
 同时需要在 Supabase Dashboard → Authentication → Providers 中启用 Email 登录。
 
 若使用官方托管，有邮件速率限制，可在 Supabase Dashboard → Authentication → Providers 关闭 Confirm email。
+
+## 部署
+
+### Vercel 部署（推荐）
+
+1. Fork 本仓库或推送到你的 GitHub 仓库
+2. 在 [Vercel](https://vercel.com) 中导入项目
+3. 配置环境变量：
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+4. 点击 Deploy
+
+### PWA 安装
+
+部署完成后，访问你的应用 URL：
+- 移动设备：浏览器会提示"添加到主屏幕"
+- 桌面浏览器：地址栏右侧会显示安装图标
+
+安装后可离线使用，数据存储在本地 IndexedDB。
 
 ## 项目结构
 
