@@ -1,0 +1,2 @@
+{"file": ".trellis/spec/frontend/quality-guidelines.md", "reason": "Lint, type-check, and quality standards for the implementation"}
+{"file": ".trellis/spec/frontend/component-guidelines.md", "reason": "Dialog/AlertDialog component patterns for the merge confirmation UI"}

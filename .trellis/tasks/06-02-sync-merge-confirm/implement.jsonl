@@ -1,0 +1,4 @@
+{"file": ".trellis/spec/frontend/state-management.md", "reason": "Zustand store patterns for pendingMerge state and resolveMerge action"}
+{"file": ".trellis/spec/frontend/type-safety.md", "reason": "TypeScript types for MergeInfo and MergeStrategy"}
+{"file": ".trellis/spec/frontend/component-guidelines.md", "reason": "UI component patterns for the merge confirmation dialog"}
+{"file": ".trellis/spec/backend/error-handling.md", "reason": "Error handling patterns for sync operations"}

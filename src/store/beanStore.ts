@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import localforage from 'localforage';
 import { v4 as uuidv4 } from 'uuid';
-import type { Bean, BeanFormData, BeanStatus, SortMode, SyncQueueItem } from '../types/bean';
+import type { Bean, BeanFormData, BeanStatus, SortMode, SyncQueueItem, MergeInfo, MergeStrategy } from '../types/bean';
 import { todayString } from '../utils/resting';
 import {
   createRemoteBean,
@@ -19,6 +19,7 @@ interface BeanStore {
   syncQueue: SyncQueueItem[];
   isOnline: boolean;
   isSyncing: boolean;
+  pendingMerge: MergeInfo | null;
 
   addBean: (data: BeanFormData) => Bean;
   updateBean: (id: string, data: Partial<BeanFormData>) => void;
@@ -31,6 +32,7 @@ interface BeanStore {
 
   // Remote sync
   syncFromRemote: () => Promise<void>;
+  resolveMerge: (strategy: MergeStrategy) => Promise<void>;
   setBeans: (beans: Bean[]) => void;
 
   exportBeans: () => string;
@@ -63,6 +65,7 @@ export const useBeanStore = create<BeanStore>()(
       syncQueue: [],
       isOnline: true,
       isSyncing: false,
+      pendingMerge: null,
 
       addBean: (data: BeanFormData) => {
         const now = new Date().toISOString();
@@ -186,34 +189,25 @@ export const useBeanStore = create<BeanStore>()(
                   : updateRemoteBean(bean));
             }
           } else {
-            // Merge: last-write-wins based on updatedAt
             const localBeans = get().beans;
-            const remoteMap = new Map(remoteBeans.map((b) => [b.id, b]));
-            const localMap = new Map(localBeans.map((b) => [b.id, b]));
 
-            const merged: Bean[] = [];
-            const allIds = new Set([...remoteMap.keys(), ...localMap.keys()]);
-
-            for (const id of allIds) {
-              const local = localMap.get(id);
-              const remote = remoteMap.get(id);
-
-              if (local && remote) {
-                merged.push(
-                  new Date(local.updatedAt) >= new Date(remote.updatedAt) ? local : remote
-                );
-              } else if (local && !remote) {
-                merged.push(local);
-                // Push missing local bean to remote
-                await (local.isDeleted
-                  ? deleteRemoteBean(local.id)
-                  : createRemoteBean(local));
-              } else if (remote && !local) {
-                merged.push(remote);
-              }
+            // Local is empty: first-time sync FROM cloud — just import remote data
+            if (localBeans.length === 0) {
+              set({ beans: remoteBeans });
+            } else if (get().pendingMerge) {
+              // Already has a pending merge dialog open — skip auto-merge
+            } else {
+              // Both local and remote have data — set pending merge for user resolution
+              set({
+                pendingMerge: {
+                  localTotal: localBeans.length,
+                  localDeleted: localBeans.filter((b) => b.isDeleted).length,
+                  remoteTotal: remoteBeans.length,
+                  remoteDeleted: remoteBeans.filter((b) => b.isDeleted).length,
+                  remoteBeans,
+                },
+              });
             }
-
-            set({ beans: merged });
           }
         } catch (err) {
           console.error('[sync] syncFromRemote error:', err);
@@ -224,6 +218,55 @@ export const useBeanStore = create<BeanStore>()(
 
       setBeans: (beans: Bean[]) => {
         set({ beans });
+      },
+
+      resolveMerge: async (strategy: MergeStrategy) => {
+        const { pendingMerge } = get();
+        if (!pendingMerge) return;
+
+        const { remoteBeans } = pendingMerge;
+        const localBeans = get().beans;
+
+        try {
+          if (strategy === 'local') {
+            // Keep local beans, push all to remote (overwrite cloud)
+            for (const bean of localBeans) {
+              await (bean.isDeleted
+                ? deleteRemoteBean(bean.id)
+                : bean.createdAt === bean.updatedAt
+                  ? createRemoteBean(bean)
+                  : updateRemoteBean(bean));
+            }
+          } else if (strategy === 'remote') {
+            // Use remote beans, replace local
+            set({ beans: remoteBeans });
+          } else if (strategy === 'merge') {
+            // Last-write-wins merge
+            const remoteMap = new Map(remoteBeans.map((b) => [b.id, b]));
+            const localMap = new Map(localBeans.map((b) => [b.id, b]));
+            const merged: Bean[] = [];
+            const allIds = new Set([...remoteMap.keys(), ...localMap.keys()]);
+
+            for (const id of allIds) {
+              const local = localMap.get(id);
+              const remote = remoteMap.get(id);
+              if (local && remote) {
+                merged.push(new Date(local.updatedAt) >= new Date(remote.updatedAt) ? local : remote);
+              } else if (local && !remote) {
+                merged.push(local);
+                await (local.isDeleted ? deleteRemoteBean(local.id) : createRemoteBean(local));
+              } else if (remote && !local) {
+                merged.push(remote);
+              }
+            }
+            set({ beans: merged });
+          }
+
+          set({ pendingMerge: null });
+        } catch (err) {
+          console.error('[sync] resolveMerge error:', err);
+          throw err;
+        }
       },
 
       exportBeans: () => {

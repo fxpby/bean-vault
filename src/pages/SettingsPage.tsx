@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useBeanStore } from '../store/beanStore';
 import { useToast } from '../components/ui/Toast';
@@ -8,7 +8,7 @@ import { signIn, signUp, signOut, getSession } from '../supabase/client';
 
 export function SettingsPage() {
   const navigate = useNavigate();
-  const { beans, exportBeans, importBeans } = useBeanStore();
+  const { beans, exportBeans, importBeans, syncFromRemote } = useBeanStore();
   const { showToast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -84,6 +84,7 @@ export function SettingsPage() {
         showToast('注册成功，已自动登录');
         setIsLoggedIn(true);
         setShowAuthPanel(false);
+        syncFromRemote();
       } else {
         showToast(error || '注册失败', 'error');
       }
@@ -93,6 +94,7 @@ export function SettingsPage() {
         setIsLoggedIn(true);
         showToast('登录成功');
         setShowAuthPanel(false);
+        syncFromRemote();
       } else {
         showToast(error || '登录失败，账号不存在？请先注册', 'error');
       }
@@ -106,11 +108,11 @@ export function SettingsPage() {
   };
 
   // Check session on mount
-  useState(() => {
+  useEffect(() => {
     getSession().then(({ data }) => {
       if (data.session) setIsLoggedIn(true);
     });
-  });
+  }, []);
 
   return (
     <div className="min-h-screen bg-canvas pb-20">
@@ -242,6 +244,7 @@ export function SettingsPage() {
         cancelLabel="替换"
         onConfirm={() => handleImport('merge')}
       />
+
     </div>
   );
 }

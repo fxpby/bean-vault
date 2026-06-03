@@ -62,3 +62,14 @@ export interface SyncQueueItem {
   data?: Partial<Bean>;
   timestamp: number;
 }
+
+export interface MergeInfo {
+  localTotal: number;
+  localDeleted: number;
+  remoteTotal: number;
+  remoteDeleted: number;
+  // 暂存云端数据，等用户选择后再 merge
+  remoteBeans: Bean[];
+}
+
+export type MergeStrategy = 'local' | 'remote' | 'merge';
