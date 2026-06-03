@@ -1,6 +1,11 @@
-import calendarData from '../info/coffee_harvest_calendar_12month_recommendations.json';
+import calendarData from "../../docs/coffee_harvest_calendar_12month_recommendations.json";
 
-export type CellStatus = 'harvest_primary' | 'harvest_secondary' | 'arrival_primary' | 'arrival_secondary' | 'none';
+export type CellStatus =
+  | "harvest_primary"
+  | "harvest_secondary"
+  | "arrival_primary"
+  | "arrival_secondary"
+  | "none";
 
 export interface HeatmapCell {
   countryId: string;
@@ -39,23 +44,26 @@ const monthlyStatusIndex = calendarData.monthly_status_index;
  * Each cell has a status derived from monthly_status_index.
  */
 export function buildHeatmapMatrix(): HeatmapRow[] {
-  const statusByMonthAndCountry: Record<number, Record<string, CellStatus>> = {};
+  const statusByMonthAndCountry: Record<
+    number,
+    Record<string, CellStatus>
+  > = {};
 
   for (const entry of monthlyStatusIndex) {
     const month = entry.month;
     statusByMonthAndCountry[month] = {};
 
     for (const id of entry.harvest_primary) {
-      statusByMonthAndCountry[month][id] = 'harvest_primary';
+      statusByMonthAndCountry[month][id] = "harvest_primary";
     }
     for (const id of entry.harvest_secondary) {
-      statusByMonthAndCountry[month][id] = 'harvest_secondary';
+      statusByMonthAndCountry[month][id] = "harvest_secondary";
     }
     for (const id of entry.arrival_primary) {
-      statusByMonthAndCountry[month][id] = 'arrival_primary';
+      statusByMonthAndCountry[month][id] = "arrival_primary";
     }
     for (const id of entry.arrival_secondary) {
-      statusByMonthAndCountry[month][id] = 'arrival_secondary';
+      statusByMonthAndCountry[month][id] = "arrival_secondary";
     }
   }
 
@@ -68,7 +76,7 @@ export function buildHeatmapMatrix(): HeatmapRow[] {
       countryName: country.name_zh,
       flag: country.flag,
       month: month.num,
-      status: statusByMonthAndCountry[month.num]?.[country.id] ?? 'none',
+      status: statusByMonthAndCountry[month.num]?.[country.id] ?? "none",
     })),
   }));
 }
@@ -77,8 +85,12 @@ export function buildHeatmapMatrix(): HeatmapRow[] {
  * Get recommendation cards for a specific month.
  * Priority order: arrival_primary > arrival_secondary > harvest_primary > harvest_secondary
  */
-export function getRecommendationsForMonth(month: number): RecommendationCard[] {
-  const monthData = calendarData.monthly_recommendations.find((m) => m.month === month);
+export function getRecommendationsForMonth(
+  month: number,
+): RecommendationCard[] {
+  const monthData = calendarData.monthly_recommendations.find(
+    (m) => m.month === month,
+  );
   if (!monthData) return [];
   return monthData.cards.map((card) => ({
     rank: card.rank,
