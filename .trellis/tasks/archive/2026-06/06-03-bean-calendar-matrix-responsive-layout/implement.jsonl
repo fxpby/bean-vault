@@ -1,0 +1,4 @@
+{"file": ".trellis/spec/frontend/component-guidelines.md", "reason": "React component patterns, hooks usage, and performance optimization guidelines"}
+{"file": ".trellis/spec/frontend/quality-guidelines.md", "reason": "Code quality standards for responsive UI implementation"}
+{"file": "CLAUDE.md", "reason": "Project overview, tech stack (Tailwind CSS), design constraints"}
+{"file": "DESIGN.md", "reason": "Design tokens and Tailwind configuration for consistent styling"}
