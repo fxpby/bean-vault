@@ -1,0 +1,4 @@
+{"file": ".trellis/spec/frontend/index.md", "reason": "Frontend spec index — component, styling, and quality conventions for building the calendar page"}
+{"file": ".trellis/spec/frontend/component-guidelines.md", "reason": "Component structure, props conventions, styling patterns (Tailwind v4 tokens, active:scale, safe-bottom), a11y patterns"}
+{"file": ".trellis/spec/frontend/directory-structure.md", "reason": "File layout conventions — where to place new page components and shared sub-components"}
+{"file": ".trellis/spec/frontend/quality-guidelines.md", "reason": "Quality standards and forbidden patterns to follow during implementation"}

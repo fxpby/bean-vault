@@ -1,0 +1,4 @@
+{"file": ".trellis/spec/frontend/index.md", "reason": "Frontend spec index — check all sub-guidelines for compliance"}
+{"file": ".trellis/spec/frontend/component-guidelines.md", "reason": "Verify component structure, props, styling tokens, a11y patterns"}
+{"file": ".trellis/spec/frontend/quality-guidelines.md", "reason": "Check for forbidden patterns and code quality issues"}
+{"file": ".trellis/spec/frontend/type-safety.md", "reason": "Verify TypeScript type patterns and validation"}

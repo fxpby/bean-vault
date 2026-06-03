@@ -33,24 +33,47 @@ export function BeanCalendarPage() {
       {/* Content */}
       <div className="px-4 pt-3 max-w-lg mx-auto">
         {/* Month selector pills */}
-        <div className="flex gap-1 overflow-x-auto scrollbar-hide mb-4">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((month) => (
-            <button
-              key={month}
-              onClick={() => setSelectedMonth(month)}
-              className={`px-3 py-1.5 text-xs rounded-lg flex-shrink-0
-                active:scale-[0.97] transition-all
-                ${
-                  month === selectedMonth
-                    ? "bg-primary text-white font-medium"
-                    : month === currentMonth
-                      ? "bg-primary-soft text-primary font-medium"
-                      : "bg-surface-card text-ink-muted"
-                }`}
-            >
-              {getMonthLabel(month)}
-            </button>
-          ))}
+        <div className="space-y-2 mb-4">
+          {/* First row: 1-6 months */}
+          <div className="flex gap-1">
+            {[1, 2, 3, 4, 5, 6].map((month) => (
+              <button
+                key={month}
+                onClick={() => setSelectedMonth(month)}
+                className={`px-3 py-1.5 text-xs rounded-lg flex-1
+                  active:scale-[0.97] transition-all
+                  ${
+                    month === selectedMonth
+                      ? "bg-primary text-white font-medium"
+                      : month === currentMonth
+                        ? "bg-primary-soft text-primary font-medium"
+                        : "bg-surface-card text-ink-muted"
+                  }`}
+              >
+                {getMonthLabel(month)}
+              </button>
+            ))}
+          </div>
+          {/* Second row: 7-12 months */}
+          <div className="flex gap-1">
+            {[7, 8, 9, 10, 11, 12].map((month) => (
+              <button
+                key={month}
+                onClick={() => setSelectedMonth(month)}
+                className={`px-3 py-1.5 text-xs rounded-lg flex-1
+                  active:scale-[0.97] transition-all
+                  ${
+                    month === selectedMonth
+                      ? "bg-primary text-white font-medium"
+                      : month === currentMonth
+                        ? "bg-primary-soft text-primary font-medium"
+                        : "bg-surface-card text-ink-muted"
+                  }`}
+              >
+                {getMonthLabel(month)}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Heatmap */}

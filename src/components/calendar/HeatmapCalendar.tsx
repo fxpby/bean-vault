@@ -1,7 +1,6 @@
 import { useMemo, useRef, useEffect, useState } from "react";
 import {
   buildHeatmapMatrix,
-  getMonthLabel,
   type CellStatus,
 } from "../../utils/calendar";
 
@@ -96,7 +95,7 @@ export function HeatmapCalendar({
                   ${isSelected ? "border-b-2 border-primary" : ""}
                   ${isCurrent && !isSelected ? "border-b border-primary/50" : ""}`}
               >
-                {getMonthLabel(month)}
+                {month}
               </button>
             );
           })}
