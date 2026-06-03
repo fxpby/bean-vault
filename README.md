@@ -18,17 +18,29 @@
 
 ## 截图
 
-![空豆仓](<https://fxpby.oss-cn-beijing.aliyuncs.com/project/bean-vault/empty-vault_(iPhone%2014%20Pro%20Max).png>)
+### 从空仓到录入
 
-![豆仓列表](<https://fxpby.oss-cn-beijing.aliyuncs.com/project/bean-vault/%E8%B1%86%E4%BB%93%E5%88%97%E8%A1%A8_(iPhone%2014%20Pro%20Max).png>)
+空仓状态提供明确的首次添加引导；添加页覆盖分类、状态、产国、庄园、处理法、烘焙度、风味标签、克单价、养豆天数与生产日期等核心字段。
 
-![豆历](<https://fxpby.oss-cn-beijing.aliyuncs.com/project/bean-vault/%E8%B1%86%E5%8E%86_(iPhone%2014%20Pro%20Max).png>)
+<p align="center">
+  <img src="docs/screenshots/01-onboarding-bean-entry.png" alt="BeanVault empty state and add bean flow" width="900">
+</p>
 
-![设置](<https://fxpby.oss-cn-beijing.aliyuncs.com/project/bean-vault/%E8%AE%BE%E7%BD%AE_(iPhone%2014%20Pro%20Max).png>)
+### 豆仓管理与豆子详情
 
-![豆子详情](<https://fxpby.oss-cn-beijing.aliyuncs.com/project/bean-vault/%E8%B1%86%E5%AD%90%E8%AF%A6%E6%83%85_(iPhone%2014%20Pro%20Max).png>)
+豆仓支持按分类、产国、状态搜索筛选，自动计算养豆进度与可饮用状态；详情页集中展示豆子参数，并提供开始喝、编辑和删除等操作入口。
 
-![添加豆子](<https://fxpby.oss-cn-beijing.aliyuncs.com/project/bean-vault/%E6%B7%BB%E5%8A%A0%E8%B1%86%E5%AD%90_(iPhone%2014%20Pro%20Max).png>)
+<p align="center">
+  <img src="docs/screenshots/02-vault-detail.png" alt="BeanVault inventory list and bean detail" width="900">
+</p>
+
+### 豆历与数据管理
+
+豆历以月份维度展示全球咖啡采收与到港周期，并给出本月推荐；设置页提供本地 JSON 导入导出、回收站与云同步入口。
+
+<p align="center">
+  <img src="docs/screenshots/03-calendar-settings.png" alt="BeanVault inventory list and bean detail" width="900">
+</p>
 
 ## 技术栈
 
