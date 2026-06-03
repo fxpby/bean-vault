@@ -1,0 +1,3 @@
+{"file": ".trellis/spec/frontend/quality-guidelines.md", "reason": "Verify code quality and logic correctness"}
+{"file": "prd.md", "reason": "Verify fix meets all acceptance criteria"}
+{"file": "CLAUDE.md", "reason": "Verify sync strategy consistency"}

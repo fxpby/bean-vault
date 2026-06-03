@@ -1,0 +1,4 @@
+{"file": ".trellis/spec/frontend/component-guidelines.md", "reason": "React hooks and state management patterns"}
+{"file": ".trellis/spec/frontend/quality-guidelines.md", "reason": "Code quality standards for bug fixes"}
+{"file": "CLAUDE.md", "reason": "Project architecture and sync strategy context"}
+{"file": "prd.md", "reason": "Bug description and fix requirements"}
