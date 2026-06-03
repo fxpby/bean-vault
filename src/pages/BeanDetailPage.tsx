@@ -7,6 +7,7 @@ import { RestingBadge } from '../components/bean/RestingBadge';
 import {
   CATEGORY_LABELS, STATUS_LABELS, PROCESS_LABELS, ROAST_LABELS,
   COUNTRIES, CATEGORY_OPTIONS, PROCESS_OPTIONS, ROAST_OPTIONS, STATUS_OPTIONS,
+  FLAVOR_SUGGESTIONS,
 } from '../constants';
 import { formatDate, todayString } from '../utils/resting';
 import type { BeanFormData, BeanStatus } from '../types/bean';
@@ -30,6 +31,7 @@ export function BeanDetailPage() {
   const [countrySearch, setCountrySearch] = useState('');
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const [newFlavorInput, setNewFlavorInput] = useState('');
+  const [showFlavorSuggestions, setShowFlavorSuggestions] = useState(false);
 
   if (!bean) {
     return (
@@ -95,17 +97,28 @@ export function BeanDetailPage() {
     setIsEditing(false);
   };
 
-  const addFlavorNote = () => {
-    const note = newFlavorInput.trim();
-    if (!note) return;
+  const addFlavorNote = (note: string) => {
+    const trimmed = note.trim();
+    if (!trimmed) return;
     const current = editForm.flavorNotes || bean.flavorNotes;
-    if (current.includes(note)) {
+    if (current.includes(trimmed)) {
       showToast('风味已存在', 'error');
       return;
     }
-    setEditForm({ ...editForm, flavorNotes: [...current, note] });
+    setEditForm({ ...editForm, flavorNotes: [...current, trimmed] });
     setNewFlavorInput('');
   };
+
+  const handleFlavorKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      addFlavorNote(newFlavorInput);
+    }
+  };
+
+  const filteredFlavors = FLAVOR_SUGGESTIONS.filter(
+    (f) => f.includes(newFlavorInput) && !(editForm.flavorNotes || bean.flavorNotes).includes(f)
+  );
 
   const flag = bean.countryCode
     ? String.fromCodePoint(...[...bean.countryCode.toUpperCase()].map(c => 0x1F1E6 + c.charCodeAt(0) - 65))
@@ -421,47 +434,57 @@ export function BeanDetailPage() {
           <div>
             <span className="text-sm text-ink-soft block mb-1.5">风味描述</span>
             {isEditing ? (
-              <div className="flex flex-wrap gap-1.5">
-                {(editForm.flavorNotes || bean.flavorNotes).map((note) => (
-                  <span key={note} className="inline-flex items-center gap-1 px-2.5 py-1 text-sm
-                    bg-primary-soft text-primary rounded-lg">
-                    {note}
-                    <button
-                      onClick={() => setEditForm({
-                        ...editForm,
-                        flavorNotes: (editForm.flavorNotes || bean.flavorNotes).filter((n) => n !== note),
-                      })}
-                    >
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        strokeWidth="2" strokeLinecap="round">
-                        <line x1="18" y1="6" x2="6" y2="18" />
-                      </svg>
-                    </button>
-                  </span>
-                ))}
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 text-sm
-                  bg-surface-card text-ink-muted rounded-lg border border-dashed border-hairline">
-                  <input
-                    type="text"
-                    value={newFlavorInput}
-                    onChange={(e) => setNewFlavorInput(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        e.preventDefault();
-                        addFlavorNote();
-                      }
-                    }}
-                    placeholder="添加风味"
-                    className="w-20 text-sm bg-transparent outline-none placeholder:text-ink-muted/50"
-                  />
-                  <button onClick={addFlavorNote}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                      strokeWidth="2" strokeLinecap="round">
-                      <line x1="12" y1="5" x2="12" y2="19" />
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                    </svg>
-                  </button>
-                </span>
+              <div className="relative">
+                <div className="flex flex-wrap gap-1.5 mb-2">
+                  {(editForm.flavorNotes || bean.flavorNotes).map((note) => (
+                    <span key={note} className="inline-flex items-center gap-1 px-2.5 py-1 text-sm
+                      bg-primary-soft text-primary rounded-lg">
+                      {note}
+                      <button
+                        onClick={() => setEditForm({
+                          ...editForm,
+                          flavorNotes: (editForm.flavorNotes || bean.flavorNotes).filter((n) => n !== note),
+                        })}
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                          strokeWidth="2" strokeLinecap="round">
+                          <line x1="18" y1="6" x2="6" y2="18" />
+                          <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                      </button>
+                    </span>
+                  ))}
+                </div>
+                <input
+                  type="text"
+                  value={newFlavorInput}
+                  onChange={(e) => {
+                    setNewFlavorInput(e.target.value);
+                    setShowFlavorSuggestions(true);
+                  }}
+                  onFocus={() => setShowFlavorSuggestions(true)}
+                  onBlur={() => setTimeout(() => setShowFlavorSuggestions(false), 200)}
+                  onKeyDown={handleFlavorKeyDown}
+                  placeholder="输入风味，回车添加"
+                  className="text-sm text-ink-body bg-surface-card rounded-lg px-2 py-1.5 border border-hairline w-full"
+                />
+                {showFlavorSuggestions && newFlavorInput && filteredFlavors.length > 0 && (
+                  <div className="absolute top-full mt-1 left-0 right-0 bg-canvas border border-hairline
+                    rounded-lg shadow-lg max-h-36 overflow-y-auto z-10">
+                    {filteredFlavors.slice(0, 8).map((f) => (
+                      <button
+                        key={f}
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          addFlavorNote(f);
+                        }}
+                        className="w-full px-3 py-2 text-sm text-left hover:bg-surface-card transition-colors"
+                      >
+                        {f}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             ) : (
               <div className="flex flex-wrap gap-1.5">
