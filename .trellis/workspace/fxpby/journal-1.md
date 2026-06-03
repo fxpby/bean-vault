@@ -104,3 +104,36 @@
 ### Next Steps
 
 - None - task complete
+
+
+## Session 4: 修复同步冲突误触发 bug - 后台恢复检测优化
+
+**Date**: 2026-06-03
+**Task**: 修复同步冲突误触发 bug - 后台恢复检测优化
+**Branch**: `main`
+
+### Summary
+
+修复移动端从后台恢复时误触发同步冲突弹窗的 bug。添加 hasDataConflict 函数比较本地和云端数据（ID 集合 + updatedAt），只有在数据真的有差异时才触发冲突确认弹窗。
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `52569eb` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
