@@ -86,8 +86,8 @@ React Components (Tailwind + Radix)
 - **Import/export**: JSON format `{ version: 1, beans: [...] }`. Import offers merge-vs-replace dialog.
 - **Country list**: Hardcoded 30-50 common coffee-producing countries with ISO codes and flag emoji
 - **Flavor notes**: Preset 20-30 word vocabulary from SCA flavor wheel with autocomplete + free input
-- **Roast levels**: 极浅烘 / 浅烘 / 中烘 / 深烘
-- **Process methods**: 日晒 / 水洗 / 蜜处理 / 厌氧发酵 / 其他
+- **Roast levels**: 极浅烘 / 浅烘 / 浅中烘 / 中烘 / 中深烘 / 深烘
+- **Process methods**: 日晒 / 水洗 / 蜜处理 / 厌氧发酵 / 脱因 / 其他
 - **Toast feedback**: All success/failure operations show toast notifications
 - **Offline indicator**: Top yellow banner when offline
 - **Empty state**: Illustration + guide text + prominent add button for first-time users

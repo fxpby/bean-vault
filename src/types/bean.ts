@@ -22,9 +22,9 @@ export type BeanCategory = 'pourover' | 'espresso' | 'subscription';
 
 export type BeanStatus = 'shelf' | 'fridge' | 'drinking' | 'finished';
 
-export type ProcessMethod = 'washed' | 'natural' | 'honey' | 'anaerobic' | 'other';
+export type ProcessMethod = 'washed' | 'natural' | 'honey' | 'anaerobic' | 'decaf' | 'other';
 
-export type RoastLevel = 'ultra-light' | 'light' | 'medium' | 'dark';
+export type RoastLevel = 'ultra-light' | 'light' | 'light-medium' | 'medium' | 'medium-dark' | 'dark';
 
 export type SortMode = 'default' | 'productionDate' | 'resting';
 
