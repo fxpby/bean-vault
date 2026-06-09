@@ -80,7 +80,8 @@ React Components (Tailwind + Radix)
 
 ## Key Design Decisions
 
-- **Bottom nav**: 2 items only (豆仓 + 设置). Add bean via FAB, search inline at top of home.
+- **Bottom nav**: 4 items (豆仓 / 豆愿 / 豆历 / 设置). Add bean via FAB, search inline at top of home.
+- **Wishlist**: 豆愿 is a separate `WishlistItem` model with Supabase sync; items can convert into Bean entries through the add-bean flow.
 - **Homepage tabs**: 全部 / 正在喝 / 架子上 / 冰箱 / 已喝完 / 回收站 (6 tabs)
 - **Search**: Immediate filtering, no debounce (data is in-memory, < 200 records)
 - **Import/export**: JSON format `{ version: 1, beans: [...] }`. Import offers merge-vs-replace dialog.

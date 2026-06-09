@@ -1,0 +1,7 @@
+{"file": ".trellis/spec/frontend/index.md", "reason": "Check frontend implementation against all relevant frontend guideline areas"}
+{"file": ".trellis/spec/frontend/component-guidelines.md", "reason": "Verify wishlist components use accessible buttons, proper props, local styling tokens, and mobile-first structure"}
+{"file": ".trellis/spec/frontend/state-management.md", "reason": "Verify wishlist store persistence, selectors, and sync behavior match local-first conventions"}
+{"file": ".trellis/spec/frontend/type-safety.md", "reason": "Verify new wishlist types, optional values, and row casts are safe and localized"}
+{"file": ".trellis/spec/frontend/quality-guidelines.md", "reason": "Verify quality gates, forbidden patterns, and user-visible toast/confirm behavior"}
+{"file": ".trellis/spec/backend/database-guidelines.md", "reason": "Verify wishlist_items migration, RLS, soft delete, and row conversion follow Supabase conventions"}
+{"file": ".trellis/spec/guides/cross-layer-thinking-guide.md", "reason": "Check conversion from WishlistItem to Bean and Supabase/local persistence boundaries"}

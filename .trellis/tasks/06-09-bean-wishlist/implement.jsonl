@@ -1,0 +1,8 @@
+{"file": ".trellis/spec/frontend/index.md", "reason": "Frontend spec index for required pre-development and implementation conventions"}
+{"file": ".trellis/spec/frontend/component-guidelines.md", "reason": "Wishlist pages/cards/forms must follow local component structure, accessibility, Tailwind token, and interaction patterns"}
+{"file": ".trellis/spec/frontend/state-management.md", "reason": "Wishlist store should mirror local-first Zustand persistence and fire-and-forget sync conventions"}
+{"file": ".trellis/spec/frontend/type-safety.md", "reason": "New WishlistItem/WishlistPriority types and optional process/roast fields must follow strict TypeScript patterns"}
+{"file": ".trellis/spec/frontend/quality-guidelines.md", "reason": "Implementation must satisfy frontend build, forbidden pattern, and interaction quality rules"}
+{"file": ".trellis/spec/backend/database-guidelines.md", "reason": "New Supabase wishlist_items table and row conversion must follow database, RLS, and snake_case mapping conventions"}
+{"file": ".trellis/spec/guides/cross-layer-thinking-guide.md", "reason": "Feature spans UI, store, persistence, Supabase, and Bean conversion boundaries"}
+{"file": ".trellis/spec/guides/code-reuse-thinking-guide.md", "reason": "Reuse existing Bean form, country selector, flavor tag, toast, confirm, and sync patterns where appropriate"}

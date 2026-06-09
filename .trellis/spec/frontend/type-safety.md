@@ -16,15 +16,16 @@
 
 | Category | TypeScript construct | Examples |
 |----------|---------------------|----------|
-| Data models | `interface` | `Bean`, `BeanFormData`, `ImportData` |
-| Union types | `type` alias | `BeanCategory`, `BeanStatus`, `ProcessMethod`, `RoastLevel`, `SortMode` |
+| Data models | `interface` | `Bean`, `BeanFormData`, `WishlistItem`, `WishlistFormData`, `ImportData` |
+| Union types | `type` alias | `BeanCategory`, `BeanStatus`, `ProcessMethod`, `RoastLevel`, `WishlistPriority`, `SortMode` |
 | Lookup helpers | `interface` | `CountryOption` |
-| Internal types | `interface` | `SyncQueueItem` |
+| Internal types | `interface` | `SyncQueueItem`, `WishlistSyncQueueItem` |
 
 ### Module-scoped types
 
 Types used only within one module are defined in that file:
 - `BeanRow` interface in `supabase/sync.ts` (DB row format, not exported)
+- `WishlistItemRow` interface in `supabase/wishlistSync.ts` (DB row format, not exported)
 - `Toast` interface in `components/ui/Toast.tsx` (local to the toast system)
 - Props interfaces defined directly above each component
 
@@ -46,7 +47,8 @@ String literal unions for finite sets of values:
 
 ```tsx
 export type BeanStatus = 'shelf' | 'fridge' | 'drinking' | 'finished';
-export type RoastLevel = 'ultra-light' | 'light' | 'medium' | 'dark';
+export type RoastLevel = 'ultra-light' | 'light' | 'light-medium' | 'medium' | 'medium-dark' | 'dark';
+export type WishlistPriority = 'low' | 'normal' | 'high' | 'must';
 ```
 
 ### Record types for label maps
@@ -60,6 +62,17 @@ export const STATUS_LABELS: Record<BeanStatus, string> = {
 };
 ```
 
+Priority and option maps follow the same pattern:
+
+```tsx
+export const WISHLIST_PRIORITY_LABELS: Record<WishlistPriority, string> = {
+  low: '随缘看看',
+  normal: '想买',
+  high: '优先买',
+  must: '必买',
+};
+```
+
 ### Optional properties with `?`
 
 ```tsx
@@ -68,6 +81,15 @@ export interface Bean {
   name: string;
   countryCode?: string;  // optional
   // ...
+}
+```
+
+Use `undefined` for truly unknown optional domain fields. For example, wishlist `process` and `roastLevel` are optional because users may not know those details before purchase:
+
+```tsx
+export interface WishlistItem {
+  process?: ProcessMethod;
+  roastLevel?: RoastLevel;
 }
 ```
 
@@ -89,6 +111,13 @@ Used sparingly, only for **Supabase row casting** where the wire format is known
 // supabase/sync.ts — casting snake_case DB rows to camelCase types
 category: row.category as Bean['category'],
 status: row.status as Bean['status'],
+```
+
+The same exception applies to wishlist row conversion:
+
+```tsx
+priority: row.priority as WishlistItem['priority'],
+process: row.process ? row.process as WishlistItem['process'] : undefined,
 ```
 
 Also used for `ImportData` JSON parsing:
