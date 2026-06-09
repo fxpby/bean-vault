@@ -98,6 +98,7 @@ interface BeanRow {
   price_per_gram: number;
   resting_days: number;
   production_date: string;
+  notes: string | null;
   is_deleted: boolean;
   created_at: string;
   updated_at: string;
@@ -121,6 +122,7 @@ async function beanToRow(bean: Bean): Promise<BeanRow> {
     price_per_gram: bean.pricePerGram,
     resting_days: bean.restingDays,
     production_date: bean.productionDate,
+    notes: bean.notes ?? '',
     is_deleted: bean.isDeleted,
     created_at: bean.createdAt,
     updated_at: bean.updatedAt,
@@ -143,6 +145,7 @@ function rowToBean(row: BeanRow): Bean {
     pricePerGram: row.price_per_gram,
     restingDays: row.resting_days,
     productionDate: row.production_date,
+    notes: row.notes ?? '',
     isDeleted: row.is_deleted,
     createdAt: row.created_at,
     updatedAt: row.updated_at,

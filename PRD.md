@@ -78,6 +78,7 @@ interface Bean {
   pricePerGram: number; // 元/克
   restingDays: number; // 养豆天数
   productionDate: string; // "YYYY-MM-DD"
+  notes: string; // 备注
   isDeleted: boolean; // 软删除标记
   createdAt: string; // ISO 8601
   updatedAt: string; // ISO 8601
@@ -150,6 +151,7 @@ interface Bean {
 | 克单价 | 数字输入 | 否 | 元/克，保留两位小数 |
 | 养豆天数 | 数字步进 | ✅ | 默认 14，最小 0，非负整数 |
 | 生产日期 | 日期选择器 | ✅ | 默认当天，不可晚于今天 |
+| 备注 | 多行文本 | 否 | 自由输入 |
 
 ### 删除策略
 

@@ -164,6 +164,7 @@ export function BeanDetailPage() {
                   restingDays: bean.restingDays,
                   productionDate: bean.productionDate,
                   flavorNotes: bean.flavorNotes,
+                  notes: bean.notes ?? '',
                   status: bean.status,
                 });
                 setCountrySearch(bean.country);
@@ -547,6 +548,22 @@ export function BeanDetailPage() {
               <span className="text-sm text-ink-body text-right">{formatDate(bean.productionDate)}</span>
             )}
           </DetailRow>
+
+          {(isEditing || (bean.notes ?? '').trim()) && (
+            <div className="py-2 border-b border-hairline-soft">
+              <span className="text-sm text-ink-soft block mb-1.5">备注</span>
+              {isEditing ? (
+                <textarea
+                  value={editForm.notes ?? bean.notes ?? ''}
+                  onChange={(e) => setEditForm({ ...editForm, notes: e.target.value })}
+                  placeholder="记录冲煮建议、购买渠道或其他想记住的信息"
+                  className="text-sm text-ink-body bg-surface-card rounded-lg px-2 py-1.5 border border-hairline w-full min-h-24 resize-y"
+                />
+              ) : (
+                <p className="text-sm text-ink-body whitespace-pre-wrap">{bean.notes ?? ''}</p>
+              )}
+            </div>
+          )}
           <DetailRow label="添加日期" value={formatDate(bean.createdAt.split('T')[0])} />
         </div>
 

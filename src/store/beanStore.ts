@@ -115,6 +115,7 @@ export const useBeanStore = create<BeanStore>()(
           pricePerGram: data.pricePerGram,
           restingDays: data.restingDays,
           productionDate: data.productionDate || todayString(),
+          notes: data.notes,
           isDeleted: false,
           createdAt: now,
           updatedAt: now,

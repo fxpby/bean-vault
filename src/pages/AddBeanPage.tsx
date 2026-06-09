@@ -29,6 +29,7 @@ export function AddBeanPage() {
     pricePerGram: 0,
     restingDays: DEFAULT_RESTING_DAYS,
     productionDate: todayString(),
+    notes: '',
   });
 
   const [flavorInput, setFlavorInput] = useState('');
@@ -373,6 +374,16 @@ export function AddBeanPage() {
             onChange={(e) => updateField('productionDate', e.target.value)}
             max={todayString()}
             className="form-input"
+          />
+        </FormField>
+
+        {/* Notes */}
+        <FormField label="备注">
+          <textarea
+            value={form.notes}
+            onChange={(e) => updateField('notes', e.target.value)}
+            placeholder="记录冲煮建议、购买渠道或其他想记住的信息"
+            className="form-input w-full min-h-24 resize-y"
           />
         </FormField>
       </div>

@@ -13,6 +13,7 @@ export interface Bean {
   pricePerGram: number;
   restingDays: number;
   productionDate: string; // YYYY-MM-DD
+  notes: string;
   isDeleted: boolean;
   createdAt: string; // ISO 8601
   updatedAt: string; // ISO 8601
@@ -42,6 +43,7 @@ export interface BeanFormData {
   pricePerGram: number;
   restingDays: number;
   productionDate: string;
+  notes: string;
 }
 
 export interface CountryOption {

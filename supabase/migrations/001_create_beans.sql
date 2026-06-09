@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS beans (
   price_per_gram NUMERIC(10, 4) DEFAULT 0,
   resting_days  INTEGER NOT NULL DEFAULT 14,
   production_date DATE NOT NULL DEFAULT CURRENT_DATE,
+  notes         TEXT DEFAULT '',
   is_deleted    BOOLEAN NOT NULL DEFAULT false,
   created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at    TIMESTAMPTZ NOT NULL DEFAULT now()

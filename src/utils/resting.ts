@@ -67,7 +67,7 @@ export function searchBeans(beans: Bean[], query: string): Bean[] {
   if (!query.trim()) return beans;
   const q = query.toLowerCase();
   return beans.filter((b) => {
-    const searchable = [b.name, b.estate, b.country, b.variety, ...b.flavorNotes].join(' ');
+    const searchable = [b.name, b.estate, b.country, b.variety, b.notes ?? '', ...b.flavorNotes].join(' ');
     return searchable.toLowerCase().includes(q);
   });
 }
