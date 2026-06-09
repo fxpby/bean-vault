@@ -43,7 +43,7 @@ export function AddWishlistPage() {
 
     const item = addItem(form);
     showToast('已加入豆愿');
-    navigate(`/wishlist/${item.id}`);
+    navigate(`/wishlist/${item.id}`, { replace: true });
   };
 
   return (

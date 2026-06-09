@@ -3,21 +3,35 @@ import { useNavigate } from 'react-router-dom';
 import { WishlistCard } from '../components/wishlist/WishlistCard';
 import { SearchBar } from '../components/ui/SearchBar';
 import { EmptyState } from '../components/ui/EmptyState';
+import { WISHLIST_PRIORITY_OPTIONS } from '../constants';
 import { useWishlistStore } from '../store/wishlistStore';
-import { searchWishlistItems } from '../utils/wishlist';
+import type { WishlistPriority } from '../types/bean';
+import {
+  compareWishlistByCreatedAt,
+  compareWishlistByPriority,
+  searchWishlistItems,
+} from '../utils/wishlist';
+
+type WishlistPriorityFilter = WishlistPriority | 'all';
+type WishlistSortMode = 'createdAt' | 'priority';
 
 export function WishlistPage() {
   const navigate = useNavigate();
   const items = useWishlistStore((s) => s.items);
   const [searchQuery, setSearchQuery] = useState('');
+  const [priorityFilter, setPriorityFilter] = useState<WishlistPriorityFilter>('all');
+  const [sortMode, setSortMode] = useState<WishlistSortMode>('createdAt');
 
   const filtered = useMemo(() => {
     const activeItems = items.filter((item) => !item.isDeleted);
     const searched = searchWishlistItems(activeItems, searchQuery);
-    return [...searched].sort(
-      (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
+    const priorityFiltered = priorityFilter === 'all'
+      ? searched
+      : searched.filter((item) => item.priority === priorityFilter);
+    return [...priorityFiltered].sort(
+      sortMode === 'priority' ? compareWishlistByPriority : compareWishlistByCreatedAt,
     );
-  }, [items, searchQuery]);
+  }, [items, priorityFilter, searchQuery, sortMode]);
 
   const hasAnyItems = items.some((item) => !item.isDeleted);
 
@@ -27,6 +41,52 @@ export function WishlistPage() {
         <div className="px-4 pt-4 pb-3">
           <h1 className="text-xl font-bold text-ink mb-3">豆愿</h1>
           <SearchBar value={searchQuery} onChange={setSearchQuery} />
+          <div className="mt-3 space-y-2">
+            <div className="flex gap-1 overflow-x-auto scrollbar-hide -mx-1 px-1">
+              <button
+                onClick={() => setPriorityFilter('all')}
+                className={`flex-shrink-0 px-2.5 py-1.5 text-xs rounded-lg active:scale-[0.97]
+                  transition-all whitespace-nowrap
+                  ${priorityFilter === 'all'
+                    ? 'bg-surface-cream text-ink font-medium'
+                    : 'text-ink-muted hover:bg-surface-card'
+                  }`}
+              >
+                全部优先级
+              </button>
+              {WISHLIST_PRIORITY_OPTIONS.map((opt) => (
+                <button
+                  key={opt.value}
+                  onClick={() => setPriorityFilter(opt.value)}
+                  className={`flex-shrink-0 px-2.5 py-1.5 text-xs rounded-lg active:scale-[0.97]
+                    transition-all whitespace-nowrap
+                    ${priorityFilter === opt.value
+                      ? 'bg-surface-cream text-ink font-medium'
+                      : 'text-ink-muted hover:bg-surface-card'
+                    }`}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+
+            <div className="inline-flex gap-1 rounded-lg bg-surface-card p-1">
+              <button
+                onClick={() => setSortMode('createdAt')}
+                className={`px-2.5 py-1 text-xs rounded-md active:scale-[0.97] transition-all
+                  ${sortMode === 'createdAt' ? 'bg-canvas text-ink font-medium shadow-sm' : 'text-ink-muted'}`}
+              >
+                加入时间
+              </button>
+              <button
+                onClick={() => setSortMode('priority')}
+                className={`px-2.5 py-1 text-xs rounded-md active:scale-[0.97] transition-all
+                  ${sortMode === 'priority' ? 'bg-canvas text-ink font-medium shadow-sm' : 'text-ink-muted'}`}
+              >
+                优先级
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 

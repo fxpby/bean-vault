@@ -27,6 +27,7 @@ After a Bean is saved from a wishlist source, ask the user whether to keep the w
 7. As a user, I want to click "加入豆仓" from both wishlist card and wishlist detail page, then complete the existing Add Bean form with known wishlist details prefilled.
 8. As a user, after saving a Bean from wishlist, I want to choose whether to keep the original wishlist item.
 9. As a user, I want deleted wishlist items to disappear after a confirmation, without a separate wishlist recycle bin.
+10. As a user, I want to filter and sort wishlist items by purchase priority so I can focus on beans I am more likely to buy soon.
 
 ## Confirmed Product Decisions
 
@@ -41,6 +42,7 @@ After a Bean is saved from a wishlist source, ask the user whether to keep the w
 - Data layer still uses soft delete (`isDeleted: true`) for sync reliability.
 - Wishlist data syncs to Supabase in MVP.
 - "庄园" UI wording in Bean pages should be updated to "庄园/产区", while keeping the field name `estate`.
+- Wishlist list default sort is加入时间, implemented as `createdAt desc`; priority sort orders `must > high > normal > low` and breaks ties by `createdAt desc`.
 
 ## Data Model
 
@@ -142,7 +144,9 @@ Requirements:
 
 - Header title: `豆愿`.
 - Search input at top.
-- Default sort: `updatedAt desc`.
+- Default sort: `createdAt desc` (`加入时间`, newest first).
+- Priority filter: `全部优先级` plus all priority labels.
+- Sort controls: `加入时间` and `优先级`; priority sort orders `必买 / 优先买 / 想买 / 随缘看看`, then加入时间 desc within each priority.
 - Filter out `isDeleted`.
 - Empty state with prominent add action.
 - FAB opens `/wishlist/add`.
@@ -153,9 +157,9 @@ Requirements:
   - country flag + country
   - estate/region and variety when present
   - priority badge
-  - price when present
-  - process / roast level when present
-  - first 3 flavor tags
+  - process / roast level when present as labeled bean-attribute chips, not unlabeled tags
+  - first 3 flavor tags in a separate labeled flavor group
+  - price when present in the footer near purchase actions
   - `加入豆仓` action
   - copy URL icon/button only when `purchaseUrl.trim()` is non-empty
 - Card does not render the raw purchase URL.
@@ -173,6 +177,7 @@ Requirements:
 - Process and roast level controls allow an explicit "未填写" state.
 - Country selector should reuse the existing `COUNTRIES` data and behavior patterns from Add Bean.
 - Save creates a wishlist item locally first, then syncs remotely.
+- After save, navigate to the new wishlist detail page with history replacement so the detail back button does not return to the stale add form.
 
 ### `/wishlist/:id`
 
@@ -248,6 +253,8 @@ Store behavior should mirror Bean store patterns:
 
 5. Wishlist UI
    - Build list page, card component, add page, detail/edit page.
+   - Add priority filter and priority sort while keeping加入时间 as the default sort.
+   - Keep card information hierarchy clear: origin/source, bean attributes, flavor, then purchase price/actions.
    - Implement URL copy button and toast feedback.
    - Implement centered confirm dialog for delete.
 
@@ -277,7 +284,9 @@ Store behavior should mirror Bean store patterns:
 ## Acceptance Criteria
 
 - [ ] Bottom nav has four items: `豆仓 / 豆愿 / 豆历 / 设置`.
-- [ ] `/wishlist` lists non-deleted wishlist items sorted by latest update.
+- [ ] `/wishlist` lists non-deleted wishlist items sorted by加入时间 (`createdAt desc`) by default.
+- [ ] `/wishlist` can filter by purchase priority.
+- [ ] `/wishlist` can sort by priority (`must > high > normal > low`) with加入时间 as the tie-breaker.
 - [ ] Wishlist search matches name, roaster, country, estate, variety, flavor notes, price, purchase URL, and reason.
 - [ ] Wishlist add requires name and country, then creates a local item and syncs remotely when possible.
 - [ ] Wishlist process and roast level are optional and can be left empty.
@@ -298,7 +307,6 @@ Store behavior should mirror Bean store patterns:
 - Purchased history list.
 - Wishlist item images.
 - Price-per-gram parsing or normalized price calculations.
-- Priority-based sorting beyond visual priority labels.
 - Notifications or reminders for wishlist items.
 - Browser extension/share-sheet integration for capturing purchase links.
 - Merging wishlist item and Bean into one data model.
@@ -314,4 +322,3 @@ Store behavior should mirror Bean store patterns:
 ## Open Questions
 
 None for MVP. Revisit after implementation if field density or navigation crowding feels heavy in browser verification.
-

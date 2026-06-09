@@ -1,4 +1,11 @@
-import type { WishlistFormData, WishlistItem } from '../types/bean';
+import type { WishlistFormData, WishlistItem, WishlistPriority } from '../types/bean';
+
+const WISHLIST_PRIORITY_WEIGHT: Record<WishlistPriority, number> = {
+  low: 0,
+  normal: 1,
+  high: 2,
+  must: 3,
+};
 
 export function getCountryFlag(countryCode: string): string {
   if (!countryCode) return '';
@@ -24,6 +31,15 @@ export function searchWishlistItems(items: WishlistItem[], query: string): Wishl
     ].join(' ');
     return searchable.toLowerCase().includes(q);
   });
+}
+
+export function compareWishlistByCreatedAt(a: WishlistItem, b: WishlistItem): number {
+  return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+}
+
+export function compareWishlistByPriority(a: WishlistItem, b: WishlistItem): number {
+  const priorityDiff = WISHLIST_PRIORITY_WEIGHT[b.priority] - WISHLIST_PRIORITY_WEIGHT[a.priority];
+  return priorityDiff || compareWishlistByCreatedAt(a, b);
 }
 
 export function buildBeanNotesFromWishlist(item: WishlistItem): string {
