@@ -39,7 +39,7 @@ export function WishlistPage() {
     <div className="min-h-screen bg-canvas pb-20">
       <div className="sticky top-0 z-20 bg-canvas/95 backdrop-blur-sm border-b border-hairline-soft">
         <div className="px-4 pt-4 pb-3">
-          <h1 className="text-xl font-bold text-ink mb-3">豆愿</h1>
+          <h1 className="text-xl font-bold text-ink mb-3">豆愿 💫</h1>
           <SearchBar value={searchQuery} onChange={setSearchQuery} />
           <div className="mt-3 space-y-2">
             <div className="flex gap-1 overflow-x-auto scrollbar-hide -mx-1 px-1">
