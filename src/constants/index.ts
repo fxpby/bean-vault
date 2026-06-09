@@ -4,6 +4,7 @@ import type {
   ProcessMethod,
   RoastLevel,
   BeanStatus,
+  WishlistPriority,
 } from "../types/bean";
 
 export const COUNTRIES: CountryOption[] = [
@@ -98,6 +99,20 @@ export const ROAST_OPTIONS: { value: RoastLevel; label: string }[] = [
   { value: "medium", label: "中烘" },
   { value: "medium-dark", label: "中深烘" },
   { value: "dark", label: "深烘" },
+];
+
+export const WISHLIST_PRIORITY_LABELS: Record<WishlistPriority, string> = {
+  low: "随缘看看",
+  normal: "想买",
+  high: "优先买",
+  must: "必买",
+};
+
+export const WISHLIST_PRIORITY_OPTIONS: { value: WishlistPriority; label: string }[] = [
+  { value: "low", label: "随缘看看" },
+  { value: "normal", label: "想买" },
+  { value: "high", label: "优先买" },
+  { value: "must", label: "必买" },
 ];
 
 export const FLAVOR_SUGGESTIONS: string[] = [

@@ -29,6 +29,8 @@ export type RoastLevel = 'ultra-light' | 'light' | 'light-medium' | 'medium' | '
 
 export type SortMode = 'default' | 'productionDate' | 'resting';
 
+export type WishlistPriority = 'low' | 'normal' | 'high' | 'must';
+
 export interface BeanFormData {
   name: string;
   category: BeanCategory;
@@ -44,6 +46,42 @@ export interface BeanFormData {
   restingDays: number;
   productionDate: string;
   notes: string;
+}
+
+export interface WishlistItem {
+  id: string;
+  name: string;
+  roaster: string;
+  country: string;
+  countryCode: string;
+  estate: string;
+  variety: string;
+  process?: ProcessMethod;
+  roastLevel?: RoastLevel;
+  flavorNotes: string[];
+  price: string;
+  purchaseUrl: string;
+  reason: string;
+  priority: WishlistPriority;
+  isDeleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface WishlistFormData {
+  name: string;
+  roaster: string;
+  country: string;
+  countryCode: string;
+  estate: string;
+  variety: string;
+  process?: ProcessMethod;
+  roastLevel?: RoastLevel;
+  flavorNotes: string[];
+  price: string;
+  purchaseUrl: string;
+  reason: string;
+  priority: WishlistPriority;
 }
 
 export interface CountryOption {
@@ -62,6 +100,14 @@ export interface SyncQueueItem {
   action: 'create' | 'update' | 'delete';
   beanId: string;
   data?: Partial<Bean>;
+  timestamp: number;
+}
+
+export interface WishlistSyncQueueItem {
+  id: string;
+  action: 'create' | 'update' | 'delete';
+  itemId: string;
+  data?: Partial<WishlistItem>;
   timestamp: number;
 }
 

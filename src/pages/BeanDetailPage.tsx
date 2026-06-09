@@ -364,7 +364,7 @@ export function BeanDetailPage() {
           </DetailRow>
 
           {isEditing ? (
-            <DetailRow label="庄园">
+            <DetailRow label="庄园/产区">
               <input
                 type="text"
                 value={editForm.estate ?? bean.estate}
@@ -373,7 +373,7 @@ export function BeanDetailPage() {
               />
             </DetailRow>
           ) : (
-            bean.estate ? <DetailRow label="庄园" value={bean.estate} /> : null
+            bean.estate ? <DetailRow label="庄园/产区" value={bean.estate} /> : null
           )}
 
           {isEditing ? (

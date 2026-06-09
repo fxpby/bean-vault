@@ -5,6 +5,7 @@ export function BottomNav() {
   const location = useLocation();
 
   const isHome = location.pathname === '/';
+  const isWishlist = location.pathname.startsWith('/wishlist');
   const isCalendar = location.pathname === '/calendar';
   const isSettings = location.pathname === '/settings';
 
@@ -26,6 +27,18 @@ export function BottomNav() {
             <line x1="14" y1="1" x2="14" y2="4" />
           </svg>
           <span className="text-[10px] font-medium">豆仓</span>
+        </button>
+
+        <button
+          onClick={() => navigate('/wishlist')}
+          className={`flex flex-col items-center justify-center gap-0.5 w-full h-full
+            active:scale-[0.97] transition-all ${isWishlist ? 'text-primary' : 'text-ink-soft'}`}
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            strokeWidth={isWishlist ? 2 : 1.5} strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+          </svg>
+          <span className="text-[10px] font-medium">豆愿</span>
         </button>
 
         <button

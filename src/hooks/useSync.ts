@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { useBeanStore } from '../store/beanStore';
+import { useWishlistStore } from '../store/wishlistStore';
 import { isLoggedIn } from '../supabase/sync';
 import { onAuthStateChange } from '../supabase/client';
 
 export function useSyncOnStartup() {
   const syncFromRemote = useBeanStore((s) => s.syncFromRemote);
+  const syncWishlistFromRemote = useWishlistStore((s) => s.syncFromRemote);
   const hasSynced = useRef(false);
 
   useEffect(() => {
@@ -15,6 +17,7 @@ export function useSyncOnStartup() {
     isLoggedIn().then((loggedIn: boolean) => {
       if (loggedIn) {
         syncFromRemote();
+        syncWishlistFromRemote();
       }
     });
 
@@ -22,11 +25,12 @@ export function useSyncOnStartup() {
     const { data } = onAuthStateChange((session: unknown) => {
       if (session) {
         syncFromRemote();
+        syncWishlistFromRemote();
       }
     });
 
     return () => {
       data.subscription.unsubscribe();
     };
-  }, [syncFromRemote]);
+  }, [syncFromRemote, syncWishlistFromRemote]);
 }

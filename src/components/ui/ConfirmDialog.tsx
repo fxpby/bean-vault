@@ -8,6 +8,7 @@ interface ConfirmDialogProps {
   confirmLabel?: string;
   cancelLabel?: string;
   onConfirm: () => void;
+  onCancel?: () => void;
   variant?: 'danger' | 'default';
 }
 
@@ -19,6 +20,7 @@ export function ConfirmDialog({
   confirmLabel = '确认',
   cancelLabel = '取消',
   onConfirm,
+  onCancel,
   variant = 'default',
 }: ConfirmDialogProps) {
   return (
@@ -36,8 +38,11 @@ export function ConfirmDialog({
           </AlertDialog.Description>
           <div className="flex gap-3 justify-end">
             <AlertDialog.Cancel asChild>
-              <button className="px-4 py-2 text-sm font-medium text-ink-muted rounded-lg
-                hover:bg-surface-card transition-colors active:scale-[0.98]">
+              <button
+                onClick={onCancel}
+                className="px-4 py-2 text-sm font-medium text-ink-muted rounded-lg
+                  hover:bg-surface-card transition-colors active:scale-[0.98]"
+              >
                 {cancelLabel}
               </button>
             </AlertDialog.Cancel>

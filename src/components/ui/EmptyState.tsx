@@ -1,8 +1,16 @@
 interface EmptyStateProps {
   onAdd: () => void;
+  title?: string;
+  description?: string;
+  buttonLabel?: string;
 }
 
-export function EmptyState({ onAdd }: EmptyStateProps) {
+export function EmptyState({
+  onAdd,
+  title = '还没有豆子',
+  description = '添加你的第一包咖啡豆，豆仓会自动帮你计算养豆期，告诉你什么时候可以开始喝',
+  buttonLabel = '添加第一包豆子',
+}: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center py-20 px-8 text-center">
       <div className="w-20 h-20 rounded-full bg-surface-card flex items-center justify-center mb-6">
@@ -15,9 +23,9 @@ export function EmptyState({ onAdd }: EmptyStateProps) {
           <line x1="14" y1="1" x2="14" y2="4" />
         </svg>
       </div>
-      <h2 className="text-lg font-semibold text-ink mb-2">还没有豆子</h2>
+      <h2 className="text-lg font-semibold text-ink mb-2">{title}</h2>
       <p className="text-sm text-ink-muted leading-relaxed max-w-xs mb-8">
-        添加你的第一包咖啡豆，豆仓会自动帮你计算养豆期，告诉你什么时候可以开始喝
+        {description}
       </p>
       <button
         onClick={onAdd}
@@ -29,7 +37,7 @@ export function EmptyState({ onAdd }: EmptyStateProps) {
           <line x1="12" y1="5" x2="12" y2="19" />
           <line x1="5" y1="12" x2="19" y2="12" />
         </svg>
-        添加第一包豆子
+        {buttonLabel}
       </button>
     </div>
   );

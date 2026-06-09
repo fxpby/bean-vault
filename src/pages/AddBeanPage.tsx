@@ -1,7 +1,9 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useBeanStore } from '../store/beanStore';
+import { useWishlistStore } from '../store/wishlistStore';
 import { useToast } from '../components/ui/Toast';
+import { ConfirmDialog } from '../components/ui/ConfirmDialog';
 import type { BeanCategory, BeanStatus, ProcessMethod, RoastLevel, BeanFormData } from '../types/bean';
 import {
   COUNTRIES, CATEGORY_OPTIONS, STATUS_OPTIONS,
@@ -9,11 +11,23 @@ import {
   DEFAULT_RESTING_DAYS,
 } from '../constants';
 import { todayString } from '../utils/resting';
+import { buildBeanNotesFromWishlist } from '../utils/wishlist';
 
 export function AddBeanPage() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const addBean = useBeanStore((s) => s.addBean);
+  const wishlistItems = useWishlistStore((s) => s.items);
+  const deleteWishlistItem = useWishlistStore((s) => s.deleteItem);
   const { showToast } = useToast();
+  const fromWishlistId = searchParams.get('fromWishlist');
+  const wishlistItem = fromWishlistId
+    ? wishlistItems.find((item) => item.id === fromWishlistId && !item.isDeleted)
+    : undefined;
+  const hasPrefilledFromWishlist = useRef(false);
+  const hasResolvedWishlistPrompt = useRef(false);
+  const [pendingBeanId, setPendingBeanId] = useState<string | null>(null);
+  const [showKeepWishlistConfirm, setShowKeepWishlistConfirm] = useState(false);
 
   const [form, setForm] = useState<BeanFormData>({
     name: '',
@@ -36,6 +50,24 @@ export function AddBeanPage() {
   const [showFlavorSuggestions, setShowFlavorSuggestions] = useState(false);
   const [countrySearch, setCountrySearch] = useState('');
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+
+  useEffect(() => {
+    if (!wishlistItem || hasPrefilledFromWishlist.current) return;
+    hasPrefilledFromWishlist.current = true;
+    setForm((prev) => ({
+      ...prev,
+      name: wishlistItem.name,
+      country: wishlistItem.country,
+      countryCode: wishlistItem.countryCode,
+      estate: wishlistItem.estate,
+      variety: wishlistItem.variety,
+      process: wishlistItem.process ?? prev.process,
+      roastLevel: wishlistItem.roastLevel ?? prev.roastLevel,
+      flavorNotes: wishlistItem.flavorNotes,
+      notes: buildBeanNotesFromWishlist(wishlistItem),
+    }));
+    setCountrySearch(wishlistItem.country);
+  }, [wishlistItem]);
 
   const updateField = <K extends keyof BeanFormData>(key: K, value: BeanFormData[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -83,9 +115,51 @@ export function AddBeanPage() {
       showToast('请选择产国', 'error');
       return;
     }
-    addBean(form);
+    const bean = addBean(form);
     showToast('添加成功');
+    if (wishlistItem) {
+      setPendingBeanId(bean.id);
+      hasResolvedWishlistPrompt.current = false;
+      setShowKeepWishlistConfirm(true);
+      return;
+    }
     navigate('/');
+  };
+
+  const navigateToCreatedBean = () => {
+    if (pendingBeanId) {
+      navigate(`/bean/${pendingBeanId}`);
+    } else {
+      navigate('/');
+    }
+  };
+
+  const handleRemoveWishlistAfterCreate = () => {
+    hasResolvedWishlistPrompt.current = true;
+    if (wishlistItem) {
+      deleteWishlistItem(wishlistItem.id);
+      showToast('已从豆愿移除');
+    }
+    setShowKeepWishlistConfirm(false);
+    navigateToCreatedBean();
+  };
+
+  const handleKeepWishlistAfterCreate = () => {
+    hasResolvedWishlistPrompt.current = true;
+    setShowKeepWishlistConfirm(false);
+    navigateToCreatedBean();
+  };
+
+  const handleKeepWishlistOpenChange = (open: boolean) => {
+    if (open) {
+      setShowKeepWishlistConfirm(true);
+      return;
+    }
+    if (showKeepWishlistConfirm && !hasResolvedWishlistPrompt.current) {
+      handleKeepWishlistAfterCreate();
+      return;
+    }
+    setShowKeepWishlistConfirm(false);
   };
 
   return (
@@ -205,12 +279,12 @@ export function AddBeanPage() {
 
         {/* Estate + Variety */}
         <div className="grid grid-cols-2 gap-4">
-          <FormField label="庄园">
+          <FormField label="庄园/产区">
             <input
               type="text"
               value={form.estate}
               onChange={(e) => updateField('estate', e.target.value)}
-              placeholder="例如：Buku Abel"
+              placeholder="例如：Buku Abel / 蕙兰"
               className="form-input"
             />
           </FormField>
@@ -387,6 +461,18 @@ export function AddBeanPage() {
           />
         </FormField>
       </div>
+
+      <ConfirmDialog
+        open={showKeepWishlistConfirm}
+        onOpenChange={handleKeepWishlistOpenChange}
+        title="已加入豆仓"
+        description="是否保留这条豆愿？"
+        confirmLabel="不保留"
+        cancelLabel="保留"
+        onConfirm={handleRemoveWishlistAfterCreate}
+        onCancel={handleKeepWishlistAfterCreate}
+        variant="default"
+      />
     </div>
   );
 }

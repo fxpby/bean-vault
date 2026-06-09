@@ -6,6 +6,9 @@ import { OfflineBanner } from './components/layout/OfflineBanner';
 import { HomePage } from './pages/HomePage';
 import { AddBeanPage } from './pages/AddBeanPage';
 import { BeanDetailPage } from './pages/BeanDetailPage';
+import { WishlistPage } from './pages/WishlistPage';
+import { AddWishlistPage } from './pages/AddWishlistPage';
+import { WishlistDetailPage } from './pages/WishlistDetailPage';
 import { BeanCalendarPage } from './pages/BeanCalendarPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { useSyncOnStartup } from './hooks/useSync';
@@ -38,6 +41,9 @@ function AppShell() {
         <Route path="/" element={<HomePage />} />
         <Route path="/add" element={<AddBeanPage />} />
         <Route path="/bean/:id" element={<BeanDetailPage />} />
+        <Route path="/wishlist" element={<WishlistPage />} />
+        <Route path="/wishlist/add" element={<AddWishlistPage />} />
+        <Route path="/wishlist/:id" element={<WishlistDetailPage />} />
         <Route path="/calendar" element={<BeanCalendarPage />} />
         <Route path="/settings" element={<SettingsPage />} />
       </Routes>
